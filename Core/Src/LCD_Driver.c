@@ -270,21 +270,24 @@ void LCD_Draw_Rectangle_Fill(uint16_t Xpos, uint16_t Ypos, uint16_t len, uint16_
 		//Draw a bunch of vertical lines from left to right
 		LCD_Draw_Vertical_Line(Xpos+i,Ypos,height,color);
 	}
-	//i = xpos actually does not make sense lmao
+	//i = xpos actually does not make sense w/Xpos+i lmao
 }
 
 void LCD_Draw_OBlock(uint16_t Xpos, uint16_t Ypos){
 	//yellow
 	//2x2
-	LCD_Draw_Rectangle_Fill(Xpos,Ypos,20,20,LCD_COLOR_YELLOW);
+	LCD_Draw_Rectangle_Fill(Xpos,Ypos,60,60,LCD_COLOR_YELLOW);
 }
 void LCD_Draw_IBlock(uint16_t Xpos, uint16_t Ypos){
 	//cyan
 	//1x4
+	LCD_Draw_Rectangle_Fill(Xpos,Ypos,30,30*4,LCD_COLOR_CYAN);
 }
 void LCD_Draw_SBlock(uint16_t Xpos, uint16_t Ypos){
 	//red
 	//2 tall
+	LCD_Draw_Rectangle_Fill(Xpos,Ypos,30,30*4,LCD_COLOR_RED);
+	LCD_Draw_Rectangle_Fill(Xpos,Ypos,30,30*4,LCD_COLOR_RED);
 }
 void LCD_Draw_ZBlock(uint16_t Xpos, uint16_t Ypos){
 	//green
@@ -293,6 +296,8 @@ void LCD_Draw_ZBlock(uint16_t Xpos, uint16_t Ypos){
 void LCD_Draw_LBlock(uint16_t Xpos, uint16_t Ypos){
 	//orange (DNE)
 	//3 tall
+	LCD_Draw_Rectangle_Fill(Xpos,Ypos,30,30*3,LCD_COLOR_BLUE);
+	LCD_Draw_Rectangle_Fill(Xpos+30,Ypos,30,30,LCD_COLOR_BLUE2);
 }
 void LCD_Draw_JBlock(uint16_t Xpos, uint16_t Ypos){
 	//pink (DNE -- see magenta?)
@@ -476,8 +481,16 @@ void screen1(void){
 	LCD_DisplayChar(135,140,'I');
 	LCD_DisplayChar(145,140,'S');
 
+	LCD_DisplayString(80, 160, 'TETRIS');
+
 	//Show all blocks
 	LCD_Draw_OBlock(230,250);
+	LCD_Draw_IBlock(230,250);
+	LCD_Draw_SBlock(230,250);
+	LCD_Draw_ZBlock(230,250);
+	LCD_Draw_LBlock(230,250);
+	LCD_Draw_JBlock(230,250);
+	LCD_Draw_TBlock(230,250);
 
 	//320 = bottom of screen
 	//250 = right of screen
