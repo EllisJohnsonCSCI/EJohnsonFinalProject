@@ -463,7 +463,7 @@ void visualDemo(void)
 }
 
 void screen1(void){
-	LCD_Clear(0, LCD_COLOR_WHITE);
+	clearScreen();
 
 	//Show all blocks
 	LCD_Draw_OBlock(90,250);
@@ -492,15 +492,50 @@ void screen1(void){
 	LCD_DisplayChar(125,200,'r');
 	LCD_DisplayChar(132,200,'t');
 	LCD_Draw_Rectangle_Empty(85,195,67,30,LCD_COLOR_BLACK);
+}
 
-	//Border
-	//LCD_Draw_Rectangle_Empty(30,10,180,300,LCD_COLOR_BLACK);
-
+void screen2(void){
 	//320 = bottom of screen
 	//250 = right of screen
 	//10 tall x 6 wide
 	//30*10 = 300
 	//30*6 = 180
+
+	clearScreen();
+
+	//Border
+	LCD_Draw_Rectangle_Empty(30,10,180,300,LCD_COLOR_BLACK);
+
+	//Get this screen to stay
+	//(will probably mean global vars in ApplicationCode.c :( )
+	//ie. if var == 0 -> pressing start on screen 1
+	//var == 1 -> moving block to sides
+
+	// - THIS IS WHERE IT GETS PAINFUL -
+
+	//Figure out RNG to choose a block
+	//Then display block
+
+	//Figure out moving the block downward
+	//Figure out moving it down on timer overflow
+
+	//Figure out block stacking & collision
+
+	//Figure out getting location of touching screen
+	//Figure out moving block from side to side
+
+	//Ensure button interrupt works
+	//Figure out rotate block on button interrupt
+}
+
+void screen3(void){
+	//Disable all interrupts
+
+	//Display time
+
+	//Figure out how to get time from prev screen
+
+	//(COULD do a main menu button)
 }
 
 /**

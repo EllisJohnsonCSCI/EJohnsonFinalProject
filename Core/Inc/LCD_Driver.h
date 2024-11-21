@@ -93,6 +93,8 @@ void LCD_Error_Handler(void);
 void visualDemo(void);
 
 void screen1(void);
+void screen2(void);
+void screen3(void);
 
 void LCD_Error_Handler(void);
 

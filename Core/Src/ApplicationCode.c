@@ -56,10 +56,20 @@ void LCD_Touch_Polling_Demo(void)
 			/* Touch valid */
 			printf("\nX: %03d\nY: %03d\n", StaticTouchData.x, StaticTouchData.y);
 			LCD_Clear(0, LCD_COLOR_RED);
+
+			screen2();
 		} else {
 			/* Touch not pressed */
 			printf("Not Pressed\n\n");
 			LCD_Clear(0, LCD_COLOR_GREEN);
+
+			//FIRST SCREEN
+			//Determine if pressing within range of button
+			if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 85, 195, 100, 100)){
+				//Move to next screen (just call another funct?)
+				LCD_Clear(0, LCD_COLOR_BLACK);
+			}
+			//^^ not working (not getting x&y data?)
 		}
 	}
 }
@@ -95,7 +105,7 @@ static uint8_t statusFlag;
 
 void EXTI15_10_IRQHandler()
 {
-	HAL_NVIC_DisableIRQ(EXTI15_10_IRQn); // May consider making this a universial interrupt guard
+	HAL_NVIC_DisableIRQ(EXTI15_10_IRQn); // May consider making this a universal interrupt guard
 	bool isTouchDetected = false;
 
 	static uint32_t count;
@@ -119,6 +129,15 @@ void EXTI15_10_IRQHandler()
 		isTouchDetected = true;
 	}
 
+	/* - ACTION TO EXECUTE DUE TO INTERRUPT - */
+
+	//SECOND SCREEN
+	//Determine which side of screen pressing on
+	//Maybe if holding then it zooms over
+
+	//THIRD SCREEN
+	//Should probably never enter here due to disabling interrupt
+
 	// Determine if it is pressed or unpressed
 	if(isTouchDetected) // Touch has been detected
 	{
@@ -129,12 +148,21 @@ void EXTI15_10_IRQHandler()
 		printf("\nX: %03d\nY: %03d \n", StaticTouchData.x, StaticTouchData.y);
 		LCD_Clear(0, LCD_COLOR_RED);
 
-	}else{
-
+	}
+	else{
 		/* Touch not pressed */
 		printf("\nNot pressed \n");
 		LCD_Clear(0, LCD_COLOR_GREEN);
+
+		//FIRST SCREEN
+		//Determine if pressing within range of button
+		if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 85, 195, 100, 100)){
+			//Move to next screen (just call another funct?)
+			LCD_Clear(0, LCD_COLOR_BLACK);
+		}
 	}
+
+	/* - I think everything below here is just taking care of interrupt bits - */
 
 	STMPE811_Write(STMPE811_FIFO_STA, 0x01);
 	STMPE811_Write(STMPE811_FIFO_STA, 0x00);
