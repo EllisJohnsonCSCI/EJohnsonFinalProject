@@ -266,46 +266,40 @@ void LCD_Draw_Rectangle_Empty(uint16_t Xpos, uint16_t Ypos, uint16_t len, uint16
 }
 
 void LCD_Draw_Rectangle_Fill(uint16_t Xpos, uint16_t Ypos, uint16_t len, uint16_t height, uint16_t color){
-	for(int i = Xpos; i < Xpos+len; i++){
+	for(int i = 0; i < len; i++){
 		//Draw a bunch of vertical lines from left to right
 		LCD_Draw_Vertical_Line(Xpos+i,Ypos,height,color);
 	}
-	//i = xpos actually does not make sense w/Xpos+i lmao
 }
 
 void LCD_Draw_OBlock(uint16_t Xpos, uint16_t Ypos){
-	//yellow
-	//2x2
-	LCD_Draw_Rectangle_Fill(Xpos,Ypos,60,60,LCD_COLOR_YELLOW);
+	LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*2,BLOCK_LENGTH*2,LCD_COLOR_YELLOW);
 }
 void LCD_Draw_IBlock(uint16_t Xpos, uint16_t Ypos){
-	//cyan
-	//1x4
-	LCD_Draw_Rectangle_Fill(Xpos,Ypos,30,30*4,LCD_COLOR_CYAN);
+	LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH,BLOCK_LENGTH*4,LCD_COLOR_CYAN);
 }
 void LCD_Draw_SBlock(uint16_t Xpos, uint16_t Ypos){
-	//red
-	//2 tall
-	LCD_Draw_Rectangle_Fill(Xpos,Ypos,30,30*4,LCD_COLOR_RED);
-	LCD_Draw_Rectangle_Fill(Xpos,Ypos,30,30*4,LCD_COLOR_RED);
+	LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*2,BLOCK_LENGTH,LCD_COLOR_RED);
+	LCD_Draw_Rectangle_Fill(Xpos-BLOCK_LENGTH,Ypos+BLOCK_LENGTH,BLOCK_LENGTH*2,BLOCK_LENGTH,LCD_COLOR_RED);
 }
 void LCD_Draw_ZBlock(uint16_t Xpos, uint16_t Ypos){
-	//green
-	//2 tall
+	LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*2,BLOCK_LENGTH,LCD_COLOR_GREEN);
+	LCD_Draw_Rectangle_Fill(Xpos+BLOCK_LENGTH,Ypos+BLOCK_LENGTH,BLOCK_LENGTH*2,BLOCK_LENGTH,LCD_COLOR_GREEN);
 }
 void LCD_Draw_LBlock(uint16_t Xpos, uint16_t Ypos){
-	//orange (DNE)
-	//3 tall
-	LCD_Draw_Rectangle_Fill(Xpos,Ypos,30,30*3,LCD_COLOR_BLUE);
-	LCD_Draw_Rectangle_Fill(Xpos+30,Ypos,30,30,LCD_COLOR_BLUE2);
+	//orange
+	LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH,BLOCK_LENGTH*3,LCD_COLOR_BLUE2);
+	LCD_Draw_Rectangle_Fill(Xpos+BLOCK_LENGTH,Ypos+(BLOCK_LENGTH*2),BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_BLUE2);
 }
 void LCD_Draw_JBlock(uint16_t Xpos, uint16_t Ypos){
-	//pink (DNE -- see magenta?)
-	//3 tall
+	//pink
+	LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH,BLOCK_LENGTH*3,LCD_COLOR_MAGENTA);
+	LCD_Draw_Rectangle_Fill(Xpos-BLOCK_LENGTH,Ypos+(BLOCK_LENGTH*2),BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_MAGENTA);
 }
 void LCD_Draw_TBlock(uint16_t Xpos, uint16_t Ypos){
-	//purple (DNE -- see blue/blue2??)
-	//3 tall
+	//purple
+	LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*3,BLOCK_LENGTH,LCD_COLOR_GREY);
+	LCD_Draw_Rectangle_Fill(Xpos+BLOCK_LENGTH,Ypos+BLOCK_LENGTH,BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_GREY);
 }
 
 //This was taken and adapted from stm32's mcu code
@@ -347,9 +341,9 @@ void LCD_DisplayChar(uint16_t Xpos, uint16_t Ypos, uint8_t Ascii)
   LCD_Draw_Char(Xpos, Ypos, &LCD_Currentfonts->table[Ascii * LCD_Currentfonts->Height]);
 }
 
-void LCD_DisplayString(uint16_t Xpos, uint16_t Ypos, uint8_t Ascii){
-	//Recall how to take in and iterate over array
-	for(int i = 0; i < len(Ascii); i++){
+void LCD_DisplayString(uint16_t Xpos, uint16_t Ypos, uint8_t *Ascii){
+	int i = 0;
+	while(Ascii[i] != '\0'){
 		switch(Ascii[i]){
 		//Capital letter = +15
 		case 'A':
@@ -418,6 +412,7 @@ void LCD_DisplayString(uint16_t Xpos, uint16_t Ypos, uint8_t Ascii){
 		default:
 			break;
 		}
+		i++;
 	}
 }
 
@@ -470,46 +465,42 @@ void visualDemo(void)
 void screen1(void){
 	LCD_Clear(0, LCD_COLOR_WHITE);
 
+	//Show all blocks
+	LCD_Draw_OBlock(90,250);
+	LCD_Draw_IBlock(105,110);
+	LCD_Draw_SBlock(170,200);
+	LCD_Draw_ZBlock(10,200);
+	LCD_Draw_LBlock(20,10);
+	LCD_Draw_JBlock(190,10);
+	LCD_Draw_TBlock(75,35);
+
 	//"Tetris"
 	LCD_SetTextColor(LCD_COLOR_BLACK);
 	LCD_SetFont(&Font16x24);
 
-	LCD_DisplayChar(80,140,'T');
-	LCD_DisplayChar(95,140,'E');
-	LCD_DisplayChar(110,140,'T');
-	LCD_DisplayChar(125,140,'R');
-	LCD_DisplayChar(135,140,'I');
-	LCD_DisplayChar(145,140,'S');
+	LCD_DisplayChar(80,40,'T');
+	LCD_DisplayChar(95,40,'E');
+	LCD_DisplayChar(110,40,'T');
+	LCD_DisplayChar(125,40,'R');
+	LCD_DisplayChar(135,40,'I');
+	LCD_DisplayChar(145,40,'S');
 
-	LCD_DisplayString(80, 160, 'TETRIS');
+	//Start button
+	LCD_DisplayChar(95,200,'S');
+	LCD_DisplayChar(105,200,'t');
+	LCD_DisplayChar(115,200,'a');
+	LCD_DisplayChar(125,200,'r');
+	LCD_DisplayChar(132,200,'t');
+	LCD_Draw_Rectangle_Empty(85,195,67,30,LCD_COLOR_BLACK);
 
-	//Show all blocks
-	LCD_Draw_OBlock(230,250);
-	LCD_Draw_IBlock(230,250);
-	LCD_Draw_SBlock(230,250);
-	LCD_Draw_ZBlock(230,250);
-	LCD_Draw_LBlock(230,250);
-	LCD_Draw_JBlock(230,250);
-	LCD_Draw_TBlock(230,250);
+	//Border
+	//LCD_Draw_Rectangle_Empty(30,10,180,300,LCD_COLOR_BLACK);
 
 	//320 = bottom of screen
 	//250 = right of screen
-	//Trying to figure out size of blocks (30x30)
 	//10 tall x 6 wide
 	//30*10 = 300
 	//30*6 = 180
-	//^^ this seems small but maybe works if we put visible buttons on either side?
-	//70px leftover so 45px per button
-	//Then 10px border on top and bottom
-
-	//Start button
-	LCD_DisplayChar(100,200,'S');
-	LCD_DisplayChar(110,200,'t');
-	LCD_DisplayChar(120,200,'a');
-	LCD_DisplayChar(130,200,'r');
-	LCD_DisplayChar(137,200,'t');
-
-	LCD_Draw_Rectangle_Empty(90,195,67,30,LCD_COLOR_BLACK);
 }
 
 /**
@@ -535,7 +526,7 @@ void InitializeLCDTouch(void)
 {
   if(STMPE811_Init() != STMPE811_State_Ok)
   {
-	 for(;;); // Hang code due to error in initialzation
+	 for(;;); // Hang code due to error in initialization
   }
 }
 
