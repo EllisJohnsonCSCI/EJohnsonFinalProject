@@ -511,13 +511,16 @@ void screen2(void){
 	//ie. if var == 0 -> pressing start on screen 1
 	//var == 1 -> moving block to sides
 
-	// - THIS IS WHERE IT GETS PAINFUL -
+	// - THIS IS WHERE IT GETS PAINFUL - //
 
 	//Figure out RNG to choose a block
 	//Then display block
 
+	//WORST STEP
+	//Ensure timer works
+		//Counts, overflows, triggers interrupt, 3 sec intervals
 	//Figure out moving the block downward
-	//Figure out moving it down on timer overflow
+	//on timer overflow
 
 	//Figure out block stacking & collision
 
