@@ -619,10 +619,10 @@ void EXTI15_10_IRQHandler()
 		break;
 
 	// Consider third screen if we include menu/replay button
-	// Else 3rd screen should disable interrupt entirely
+
 	default:
 		break;
- 80006ac:	e049      	b.n	8000742 <EXTI15_10_IRQHandler+0x11a>
+ 80006ac:	e04a      	b.n	8000744 <EXTI15_10_IRQHandler+0x11c>
 		if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 70, 160, 100, 100)){
  80006ae:	4b38      	ldr	r3, [pc, #224]	@ (8000790 <EXTI15_10_IRQHandler+0x168>)
  80006b0:	881b      	ldrh	r3, [r3, #0]
@@ -642,11 +642,11 @@ void EXTI15_10_IRQHandler()
 		screen2();
  80006ca:	f000 fcb3 	bl	8001034 <screen2>
 		break;
- 80006ce:	e038      	b.n	8000742 <EXTI15_10_IRQHandler+0x11a>
+ 80006ce:	e039      	b.n	8000744 <EXTI15_10_IRQHandler+0x11c>
 		if(isTouchDetected) // Touch has been detected
  80006d0:	79fb      	ldrb	r3, [r7, #7]
  80006d2:	2b00      	cmp	r3, #0
- 80006d4:	d02f      	beq.n	8000736 <EXTI15_10_IRQHandler+0x10e>
+ 80006d4:	d030      	beq.n	8000738 <EXTI15_10_IRQHandler+0x110>
 			printf("\nPressed");
  80006d6:	482f      	ldr	r0, [pc, #188]	@ (8000794 <EXTI15_10_IRQHandler+0x16c>)
  80006d8:	f005 f878 	bl	80057cc <iprintf>
@@ -666,88 +666,87 @@ void EXTI15_10_IRQHandler()
  80006f4:	4b26      	ldr	r3, [pc, #152]	@ (8000790 <EXTI15_10_IRQHandler+0x168>)
  80006f6:	881b      	ldrh	r3, [r3, #0]
  80006f8:	2b7c      	cmp	r3, #124	@ 0x7c
- 80006fa:	d809      	bhi.n	8000710 <EXTI15_10_IRQHandler+0xe8>
+ 80006fa:	d80a      	bhi.n	8000712 <EXTI15_10_IRQHandler+0xea>
  80006fc:	4b24      	ldr	r3, [pc, #144]	@ (8000790 <EXTI15_10_IRQHandler+0x168>)
  80006fe:	885b      	ldrh	r3, [r3, #2]
  8000700:	f5b3 7fa0 	cmp.w	r3, #320	@ 0x140
- 8000704:	d204      	bcs.n	8000710 <EXTI15_10_IRQHandler+0xe8>
-				LCD_Clear(0, LCD_COLOR_BLACK);
- 8000706:	2100      	movs	r1, #0
- 8000708:	2000      	movs	r0, #0
- 800070a:	f000 fa27 	bl	8000b5c <LCD_Clear>
+ 8000704:	d205      	bcs.n	8000712 <EXTI15_10_IRQHandler+0xea>
+				LCD_Clear(0, LCD_COLOR_RED);
+ 8000706:	f44f 4178 	mov.w	r1, #63488	@ 0xf800
+ 800070a:	2000      	movs	r0, #0
+ 800070c:	f000 fa26 	bl	8000b5c <LCD_Clear>
 		break;
- 800070e:	e017      	b.n	8000740 <EXTI15_10_IRQHandler+0x118>
+ 8000710:	e017      	b.n	8000742 <EXTI15_10_IRQHandler+0x11a>
 			else if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 125, 0, 125, 320)){
- 8000710:	4b1f      	ldr	r3, [pc, #124]	@ (8000790 <EXTI15_10_IRQHandler+0x168>)
- 8000712:	881b      	ldrh	r3, [r3, #0]
- 8000714:	2b7c      	cmp	r3, #124	@ 0x7c
- 8000716:	d913      	bls.n	8000740 <EXTI15_10_IRQHandler+0x118>
- 8000718:	4b1d      	ldr	r3, [pc, #116]	@ (8000790 <EXTI15_10_IRQHandler+0x168>)
- 800071a:	881b      	ldrh	r3, [r3, #0]
- 800071c:	2bf9      	cmp	r3, #249	@ 0xf9
- 800071e:	d80f      	bhi.n	8000740 <EXTI15_10_IRQHandler+0x118>
- 8000720:	4b1b      	ldr	r3, [pc, #108]	@ (8000790 <EXTI15_10_IRQHandler+0x168>)
- 8000722:	885b      	ldrh	r3, [r3, #2]
- 8000724:	f5b3 7fa0 	cmp.w	r3, #320	@ 0x140
- 8000728:	d20a      	bcs.n	8000740 <EXTI15_10_IRQHandler+0x118>
-				LCD_Clear(0, LCD_COLOR_GREY);
- 800072a:	f24f 71de 	movw	r1, #63454	@ 0xf7de
- 800072e:	2000      	movs	r0, #0
- 8000730:	f000 fa14 	bl	8000b5c <LCD_Clear>
+ 8000712:	4b1f      	ldr	r3, [pc, #124]	@ (8000790 <EXTI15_10_IRQHandler+0x168>)
+ 8000714:	881b      	ldrh	r3, [r3, #0]
+ 8000716:	2b7c      	cmp	r3, #124	@ 0x7c
+ 8000718:	d913      	bls.n	8000742 <EXTI15_10_IRQHandler+0x11a>
+ 800071a:	4b1d      	ldr	r3, [pc, #116]	@ (8000790 <EXTI15_10_IRQHandler+0x168>)
+ 800071c:	881b      	ldrh	r3, [r3, #0]
+ 800071e:	2bf9      	cmp	r3, #249	@ 0xf9
+ 8000720:	d80f      	bhi.n	8000742 <EXTI15_10_IRQHandler+0x11a>
+ 8000722:	4b1b      	ldr	r3, [pc, #108]	@ (8000790 <EXTI15_10_IRQHandler+0x168>)
+ 8000724:	885b      	ldrh	r3, [r3, #2]
+ 8000726:	f5b3 7fa0 	cmp.w	r3, #320	@ 0x140
+ 800072a:	d20a      	bcs.n	8000742 <EXTI15_10_IRQHandler+0x11a>
+				LCD_Clear(0, LCD_COLOR_GREEN);
+ 800072c:	f44f 61fc 	mov.w	r1, #2016	@ 0x7e0
+ 8000730:	2000      	movs	r0, #0
+ 8000732:	f000 fa13 	bl	8000b5c <LCD_Clear>
 		break;
- 8000734:	e004      	b.n	8000740 <EXTI15_10_IRQHandler+0x118>
+ 8000736:	e004      	b.n	8000742 <EXTI15_10_IRQHandler+0x11a>
 			printf("\nNot pressed \n");
- 8000736:	4819      	ldr	r0, [pc, #100]	@ (800079c <EXTI15_10_IRQHandler+0x174>)
- 8000738:	f005 f8b0 	bl	800589c <puts>
+ 8000738:	4818      	ldr	r0, [pc, #96]	@ (800079c <EXTI15_10_IRQHandler+0x174>)
+ 800073a:	f005 f8af 	bl	800589c <puts>
 			screen2();
- 800073c:	f000 fc7a 	bl	8001034 <screen2>
+ 800073e:	f000 fc79 	bl	8001034 <screen2>
 		break;
- 8000740:	bf00      	nop
+ 8000742:	bf00      	nop
 	}
 
 
 	/* - I think everything below here is just taking care of interrupt bits - */
 
 	STMPE811_Write(STMPE811_FIFO_STA, 0x01);
- 8000742:	2101      	movs	r1, #1
- 8000744:	204b      	movs	r0, #75	@ 0x4b
- 8000746:	f001 fb3b 	bl	8001dc0 <STMPE811_Write>
+ 8000744:	2101      	movs	r1, #1
+ 8000746:	204b      	movs	r0, #75	@ 0x4b
+ 8000748:	f001 fb3a 	bl	8001dc0 <STMPE811_Write>
 	STMPE811_Write(STMPE811_FIFO_STA, 0x00);
- 800074a:	2100      	movs	r1, #0
- 800074c:	204b      	movs	r0, #75	@ 0x4b
- 800074e:	f001 fb37 	bl	8001dc0 <STMPE811_Write>
+ 800074c:	2100      	movs	r1, #0
+ 800074e:	204b      	movs	r0, #75	@ 0x4b
+ 8000750:	f001 fb36 	bl	8001dc0 <STMPE811_Write>
 
 	// Re-enable IRQs
     WriteDataToTouchModule(STMPE811_INT_EN, currentIRQEnables);
- 8000752:	79bb      	ldrb	r3, [r7, #6]
- 8000754:	4619      	mov	r1, r3
- 8000756:	200a      	movs	r0, #10
- 8000758:	f000 fcb4 	bl	80010c4 <WriteDataToTouchModule>
+ 8000754:	79bb      	ldrb	r3, [r7, #6]
+ 8000756:	4619      	mov	r1, r3
+ 8000758:	200a      	movs	r0, #10
+ 800075a:	f000 fcb3 	bl	80010c4 <WriteDataToTouchModule>
 	HAL_EXTI_ClearPending(&LCDTouchIRQ, EXTI_TRIGGER_RISING_FALLING);
- 800075c:	2103      	movs	r1, #3
- 800075e:	4810      	ldr	r0, [pc, #64]	@ (80007a0 <EXTI15_10_IRQHandler+0x178>)
- 8000760:	f002 f89a 	bl	8002898 <HAL_EXTI_ClearPending>
+ 800075e:	2103      	movs	r1, #3
+ 8000760:	480f      	ldr	r0, [pc, #60]	@ (80007a0 <EXTI15_10_IRQHandler+0x178>)
+ 8000762:	f002 f899 	bl	8002898 <HAL_EXTI_ClearPending>
 
 	HAL_NVIC_ClearPendingIRQ(EXTI15_10_IRQn);
- 8000764:	2028      	movs	r0, #40	@ 0x28
- 8000766:	f002 f888 	bl	800287a <HAL_NVIC_ClearPendingIRQ>
+ 8000766:	2028      	movs	r0, #40	@ 0x28
+ 8000768:	f002 f887 	bl	800287a <HAL_NVIC_ClearPendingIRQ>
 	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
- 800076a:	2028      	movs	r0, #40	@ 0x28
- 800076c:	f002 f85d 	bl	800282a <HAL_NVIC_EnableIRQ>
+ 800076c:	2028      	movs	r0, #40	@ 0x28
+ 800076e:	f002 f85c 	bl	800282a <HAL_NVIC_EnableIRQ>
 
 	//Potential ERRATA? Clearing IRQ bit again due to an IRQ being triggered DURING the handling of this IRQ..
 	WriteDataToTouchModule(STMPE811_INT_STA, clearIRQData);
- 8000770:	797b      	ldrb	r3, [r7, #5]
- 8000772:	4619      	mov	r1, r3
- 8000774:	200b      	movs	r0, #11
- 8000776:	f000 fca5 	bl	80010c4 <WriteDataToTouchModule>
+ 8000772:	797b      	ldrb	r3, [r7, #5]
+ 8000774:	4619      	mov	r1, r3
+ 8000776:	200b      	movs	r0, #11
+ 8000778:	f000 fca4 	bl	80010c4 <WriteDataToTouchModule>
 
 }
- 800077a:	bf00      	nop
- 800077c:	3708      	adds	r7, #8
- 800077e:	46bd      	mov	sp, r7
- 8000780:	bd80      	pop	{r7, pc}
- 8000782:	bf00      	nop
+ 800077c:	bf00      	nop
+ 800077e:	3708      	adds	r7, #8
+ 8000780:	46bd      	mov	sp, r7
+ 8000782:	bd80      	pop	{r7, pc}
  8000784:	200000ac 	.word	0x200000ac
  8000788:	200000a8 	.word	0x200000a8
  800078c:	20000094 	.word	0x20000094
@@ -2079,10 +2078,10 @@ void screen2(void){
 	clearScreen();
  8001046:	f7ff fcb5 	bl	80009b4 <clearScreen>
 
-	LCD_DisplayChar(80,40,'2');
+	LCD_DisplayChar(120,40,'2');
  800104a:	2232      	movs	r2, #50	@ 0x32
  800104c:	2128      	movs	r1, #40	@ 0x28
- 800104e:	2050      	movs	r0, #80	@ 0x50
+ 800104e:	2078      	movs	r0, #120	@ 0x78
  8001050:	f7ff ff62 	bl	8000f18 <LCD_DisplayChar>
 
 	//Border
@@ -2094,7 +2093,7 @@ void screen2(void){
  800105e:	210a      	movs	r1, #10
  8001060:	201e      	movs	r0, #30
  8001062:	f7ff fd9d 	bl	8000ba0 <LCD_Draw_Rectangle_Empty>
-	//Figure out getting location of touching screen
+
 	//Figure out moving block from side to side
 
 	//Ensure button interrupt works

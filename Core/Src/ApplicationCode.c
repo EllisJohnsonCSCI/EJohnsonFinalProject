@@ -145,14 +145,14 @@ void EXTI15_10_IRQHandler()
 			/* Touch valid */
 			printf("\nX: %03d\nY: %03d \n", StaticTouchData.x, StaticTouchData.y);
 
-			// Check if pressing on left or right side of screen
+			// Check which side of screen is pressed
 			if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 0, 0, 125, 320)){
 				// Pressing on left
-				LCD_Clear(0, LCD_COLOR_BLACK);
+				LCD_Clear(0, LCD_COLOR_RED);
 			}
 			else if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 125, 0, 125, 320)){
 				// Pressing on right
-				LCD_Clear(0, LCD_COLOR_GREY);
+				LCD_Clear(0, LCD_COLOR_GREEN);
 			}
 		}
 		else{

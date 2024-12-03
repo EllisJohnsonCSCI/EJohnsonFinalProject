@@ -506,15 +506,17 @@ void screen2(void){
 
 	clearScreen();
 
-	LCD_DisplayChar(80,40,'2');
+	LCD_DisplayChar(110,40,'2');
 
 	//Border
 	LCD_Draw_Rectangle_Empty(30,10,180,300,LCD_COLOR_BLACK);
 
-	//Get this screen to stay
+	//RNG to choose a block
+	//HAL_RNG_Init();
+	//uint32_t generatedNum = HAL_RNG_GenerateRandomNumber();
+	//LCD_DisplayChar(110,40,generatedNum);	//might not work without casting to uint8_t
 
-	//Figure out RNG to choose a block
-	//Then display block
+	//Display block
 
 	//Ensure timer works
 		//Counts, overflows, triggers interrupt, 3 sec intervals
@@ -523,7 +525,6 @@ void screen2(void){
 
 	//Figure out block stacking & collision
 
-	//Figure out getting location of touching screen
 	//Figure out moving block from side to side
 
 	//Ensure button interrupt works
