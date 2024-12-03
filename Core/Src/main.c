@@ -40,16 +40,23 @@ int main(void)
   SystemClockOverride();
 
   ApplicationInit(); // Initializes the LCD functionality
+  // Enabling touch screen errors here? I2C breaks
 
   //LCD_Visual_Demo();
 
   HAL_Delay(5000);
 
+  // Test RNG
+  while (1){
+	  HAL_RNG_Init();
+	  uint32_t generatedNum = HAL_RNG_GenerateRandomNumber();
+  }
+
   screen1();
 
   // DO NOT CALL THIS FUNCTION WHEN INTERRUPT MODE IS SELECTED IN THE COMPILE SWITCH IN stmpe811.h
   // Un-comment the below function after setting COMPILE_TOUCH to 1 in stmpe811.h
-  LCD_Touch_Polling_Demo(); // This function Will not return
+  //LCD_Touch_Polling_Demo(); // This function Will not return
 
   while (1)
   {

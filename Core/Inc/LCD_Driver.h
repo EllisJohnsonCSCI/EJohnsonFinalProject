@@ -3,6 +3,7 @@
  *
  *  Created on: Sep 28, 2023
  *      Author: Xavion
+ *      Adjusted by: Ellis
  */
 
 #ifndef INC_LCD_DRIVER_H_

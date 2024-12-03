@@ -3,12 +3,13 @@
  *
  *  Created on: Dec 30, 2023 (updated 11/12/2024) Thanks Donavon! 
  *      Author: Xavion
+ *      Adjusted by: Ellis
  */
 
 #include "ApplicationCode.h"
 
 /* Static variables */
-
+//uint8_t screenCount = 0;
 
 extern void initialise_monitor_handles(void); 
 
@@ -50,26 +51,17 @@ void LCD_Visual_Demo(void)
 void LCD_Touch_Polling_Demo(void)
 {
 	LCD_Clear(0,LCD_COLOR_GREEN);
+
 	while (1) {
 		/* If touch pressed */
 		if (returnTouchStateAndLocation(&StaticTouchData) == STMPE811_State_Pressed) {
 			/* Touch valid */
 			printf("\nX: %03d\nY: %03d\n", StaticTouchData.x, StaticTouchData.y);
 			LCD_Clear(0, LCD_COLOR_RED);
-
-			screen2();
 		} else {
 			/* Touch not pressed */
 			printf("Not Pressed\n\n");
 			LCD_Clear(0, LCD_COLOR_GREEN);
-
-			//FIRST SCREEN
-			//Determine if pressing within range of button
-			if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 85, 195, 100, 100)){
-				//Move to next screen (just call another funct?)
-				LCD_Clear(0, LCD_COLOR_BLACK);
-			}
-			//^^ not working (not getting x&y data?)
 		}
 	}
 }
@@ -131,12 +123,23 @@ void EXTI15_10_IRQHandler()
 
 	/* - ACTION TO EXECUTE DUE TO INTERRUPT - */
 
-	//SECOND SCREEN
-	//Determine which side of screen pressing on
-	//Maybe if holding then it zooms over
-
-	//THIRD SCREEN
-	//Should probably never enter here due to disabling interrupt
+	switch(screenCount){
+	// SCREEN 1 -> 2
+	case 0:
+		//Check if pressing in range of button (or just don't include button for now)
+		screenCount = 1;
+		screen2();
+		break;
+	// PLAYING GAME (moving block from side to side)
+	case 1:
+		//Check if pressing on left or right side of screen
+		//Maybe if holding then it zooms over
+		break;
+	// Consider third screen if we include menu/replay button
+	// Else 3rd screen should disable interrupt entirely
+	default:
+		break;
+	}
 
 	// Determine if it is pressed or unpressed
 	if(isTouchDetected) // Touch has been detected
@@ -154,13 +157,18 @@ void EXTI15_10_IRQHandler()
 		printf("\nNot pressed \n");
 		LCD_Clear(0, LCD_COLOR_GREEN);
 
-		//FIRST SCREEN
-		//Determine if pressing within range of button
-		if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 85, 195, 100, 100)){
-			//Move to next screen (just call another funct?)
-			LCD_Clear(0, LCD_COLOR_BLACK);
-		}
+		// Testing where we are touching on screen
+		//not working (not getting x&y data?)
+		//if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 0, 0, 125, 160)){
+			// Pressing on left
+			//LCD_Clear(0, LCD_COLOR_BLACK);
+		//}
+		//else if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 125, 160, 125, 160)){
+			// Pressing on right
+			//LCD_Clear(0, LCD_COLOR_GREY);
+		//}
 	}
+
 
 	/* - I think everything below here is just taking care of interrupt bits - */
 

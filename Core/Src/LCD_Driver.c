@@ -3,6 +3,7 @@
  *
  *  Created on: Sep 28, 2023
  *      Author: Xavion
+ *      Adjusted by: Ellis
  */
 
 #include "LCD_Driver.h"
@@ -500,23 +501,21 @@ void screen2(void){
 	//10 tall x 6 wide
 	//30*10 = 300
 	//30*6 = 180
+	LCD_SetTextColor(LCD_COLOR_BLACK);
+	LCD_SetFont(&Font16x24);
 
 	clearScreen();
+
+	LCD_DisplayChar(80,40,'2');
 
 	//Border
 	LCD_Draw_Rectangle_Empty(30,10,180,300,LCD_COLOR_BLACK);
 
 	//Get this screen to stay
-	//(will probably mean global vars in ApplicationCode.c :( )
-	//ie. if var == 0 -> pressing start on screen 1
-	//var == 1 -> moving block to sides
-
-	// - THIS IS WHERE IT GETS PAINFUL - //
 
 	//Figure out RNG to choose a block
 	//Then display block
 
-	//WORST STEP
 	//Ensure timer works
 		//Counts, overflows, triggers interrupt, 3 sec intervals
 	//Figure out moving the block downward
@@ -532,11 +531,17 @@ void screen2(void){
 }
 
 void screen3(void){
+	LCD_SetTextColor(LCD_COLOR_BLACK);
+	LCD_SetFont(&Font16x24);
+
+	clearScreen();
+
 	//Disable all interrupts
 
 	//Display time
+	LCD_DisplayChar(80,40,'3');
 
-	//Figure out how to get time from prev screen
+	//Get time from prev screen
 
 	//(COULD do a main menu button)
 }
