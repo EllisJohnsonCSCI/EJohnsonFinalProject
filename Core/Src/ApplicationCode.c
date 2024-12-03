@@ -153,11 +153,11 @@ void EXTI15_10_IRQHandler()
 
 		// Testing where we are touching on screen
 		//not working (not getting x&y data?)
-		if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 0, 0, 125, 160)){
+		if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 0, 0, 125, 320)){
 			// Pressing on left
 			LCD_Clear(0, LCD_COLOR_BLACK);
 		}
-		else if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 125, 160, 125, 160)){
+		else if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 125, 0, 125, 320)){
 			// Pressing on right
 			LCD_Clear(0, LCD_COLOR_GREY);
 		}
