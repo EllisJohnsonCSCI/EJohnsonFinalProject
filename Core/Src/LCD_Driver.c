@@ -492,7 +492,7 @@ void screen1(void){
 	LCD_DisplayChar(115,200,'a');
 	LCD_DisplayChar(125,200,'r');
 	LCD_DisplayChar(132,200,'t');
-	LCD_Draw_Rectangle_Empty(85,195,67,30,LCD_COLOR_BLACK);
+	LCD_Draw_Rectangle_Empty(70,160,100,100,LCD_COLOR_BLACK);
 }
 
 void screen2(void){

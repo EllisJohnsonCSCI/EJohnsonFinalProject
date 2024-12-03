@@ -126,46 +126,47 @@ void EXTI15_10_IRQHandler()
 	switch(screenCount){
 	// SCREEN 1 -> 2
 	case 0:
-		//Check if pressing in range of button (or just don't include button for now)
+		//Check if pressing in range of button
+		if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 70, 160, 100, 100)){
+			// Doesn't work so just ignore button
+		}
 		screenCount = 1;
 		screen2();
 		break;
+
 	// PLAYING GAME (moving block from side to side)
 	case 1:
-		//Check if pressing on left or right side of screen
-		//Maybe if holding then it zooms over
+		// Determine if it is pressed or unpressed
+		if(isTouchDetected) // Touch has been detected
+		{
+			printf("\nPressed");
+			// May need to do numerous retries?
+			DetermineTouchPosition(&StaticTouchData);
+			/* Touch valid */
+			printf("\nX: %03d\nY: %03d \n", StaticTouchData.x, StaticTouchData.y);
+
+			// Check if pressing on left or right side of screen
+			if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 0, 0, 125, 320)){
+				// Pressing on left
+				LCD_Clear(0, LCD_COLOR_BLACK);
+			}
+			else if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 125, 0, 125, 320)){
+				// Pressing on right
+				LCD_Clear(0, LCD_COLOR_GREY);
+			}
+		}
+		else{
+			/* Touch not pressed */
+			printf("\nNot pressed \n");
+			screen2();
+		}
+
 		break;
+
 	// Consider third screen if we include menu/replay button
-	// Else 3rd screen should disable interrupt entirely
+
 	default:
 		break;
-	}
-
-	// Determine if it is pressed or unpressed
-	if(isTouchDetected) // Touch has been detected
-	{
-		printf("\nPressed");
-		// May need to do numerous retries? 
-		DetermineTouchPosition(&StaticTouchData);
-		/* Touch valid */
-		printf("\nX: %03d\nY: %03d \n", StaticTouchData.x, StaticTouchData.y);
-		LCD_Clear(0, LCD_COLOR_RED);
-
-		// Testing where we are touching on screen
-		//not working (not getting x&y data?)
-		if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 0, 0, 125, 320)){
-			// Pressing on left
-			LCD_Clear(0, LCD_COLOR_BLACK);
-		}
-		else if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 125, 0, 125, 320)){
-			// Pressing on right
-			LCD_Clear(0, LCD_COLOR_GREY);
-		}
-	}
-	else{
-		/* Touch not pressed */
-		printf("\nNot pressed \n");
-		LCD_Clear(0, LCD_COLOR_GREEN);
 	}
 
 
