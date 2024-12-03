@@ -26,3 +26,8 @@
 ../Core/Src/LCD_Driver.c:498:6:screen2	1
 ../Core/Src/LCD_Driver.c:533:6:screen3	1
 ../Core/Src/LCD_Driver.c:553:6:LCD_Error_Handler	1
+../Core/Src/LCD_Driver.c:568:6:InitializeLCDTouch	2
+../Core/Src/LCD_Driver.c:576:18:returnTouchStateAndLocation	1
+../Core/Src/LCD_Driver.c:581:6:DetermineTouchPosition	1
+../Core/Src/LCD_Driver.c:586:9:ReadRegisterFromTouchModule	1
+../Core/Src/LCD_Driver.c:591:6:WriteDataToTouchModule	1

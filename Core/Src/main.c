@@ -29,39 +29,36 @@ void SystemClockOverride(void);
   * @brief  The application entry point.
   * @retval int
   */
-int main(void)
-{
+int main(void){
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+	HAL_Init();
 
-  // The default system configuration function is "suspect" so we need to make our own clock configuration
-  // Note - You, the developer, MAY have to play with some of this configuration as you progress in your project
-  SystemClockOverride();
+	// The default system configuration function is "suspect" so we need to make our own clock configuration
+	// Note - You, the developer, MAY have to play with some of this configuration as you progress in your project
+	SystemClockOverride();
 
-  ApplicationInit(); // Initializes the LCD functionality
-  // Enabling touch screen errors here? I2C breaks
+	ApplicationInit(); // Initializes the LCD functionality
 
-  //LCD_Visual_Demo();
+	//LCD_Visual_Demo();
 
-  HAL_Delay(5000);
+	HAL_Delay(5000);
 
-  // Test RNG
-  while (1){
-	  HAL_RNG_Init();
-	  uint32_t generatedNum = HAL_RNG_GenerateRandomNumber();
-  }
+	// Test RNG
+	//while (1){
+		//HAL_RNG_Init();
+		//uint32_t generatedNum = HAL_RNG_GenerateRandomNumber();
+	//}
 
-  screen1();
+	screen1();
 
-  // DO NOT CALL THIS FUNCTION WHEN INTERRUPT MODE IS SELECTED IN THE COMPILE SWITCH IN stmpe811.h
-  // Un-comment the below function after setting COMPILE_TOUCH to 1 in stmpe811.h
-  //LCD_Touch_Polling_Demo(); // This function Will not return
+	// DO NOT CALL THIS FUNCTION WHEN INTERRUPT MODE IS SELECTED IN THE COMPILE SWITCH IN stmpe811.h
+	// Un-comment the below function after setting COMPILE_TOUCH to 1 in stmpe811.h
+	//LCD_Touch_Polling_Demo(); // This function Will not return
 
-  while (1)
-  {
-
-  }
+	while (1){
+		//
+	}
 
 }
 

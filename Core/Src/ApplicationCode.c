@@ -9,7 +9,7 @@
 #include "ApplicationCode.h"
 
 /* Static variables */
-//uint8_t screenCount = 0;
+uint8_t screenCount = 0;
 
 extern void initialise_monitor_handles(void); 
 
@@ -151,22 +151,21 @@ void EXTI15_10_IRQHandler()
 		printf("\nX: %03d\nY: %03d \n", StaticTouchData.x, StaticTouchData.y);
 		LCD_Clear(0, LCD_COLOR_RED);
 
+		// Testing where we are touching on screen
+		//not working (not getting x&y data?)
+		if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 0, 0, 125, 160)){
+			// Pressing on left
+			LCD_Clear(0, LCD_COLOR_BLACK);
+		}
+		else if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 125, 160, 125, 160)){
+			// Pressing on right
+			LCD_Clear(0, LCD_COLOR_GREY);
+		}
 	}
 	else{
 		/* Touch not pressed */
 		printf("\nNot pressed \n");
 		LCD_Clear(0, LCD_COLOR_GREEN);
-
-		// Testing where we are touching on screen
-		//not working (not getting x&y data?)
-		//if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 0, 0, 125, 160)){
-			// Pressing on left
-			//LCD_Clear(0, LCD_COLOR_BLACK);
-		//}
-		//else if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 125, 160, 125, 160)){
-			// Pressing on right
-			//LCD_Clear(0, LCD_COLOR_GREY);
-		//}
 	}
 
 
