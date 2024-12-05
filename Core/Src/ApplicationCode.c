@@ -21,6 +21,9 @@ void LCDTouchScreenInterruptGPIOInit(void);
 #endif // TOUCH_INTERRUPT_ENABLED
 #endif // COMPILE_TOUCH_FUNCTIONS
 
+
+/* GENERAL */
+
 void ApplicationInit(void)
 {
 	initialise_monitor_handles(); // Allows printf functionality
@@ -40,7 +43,14 @@ void ApplicationInit(void)
 	#endif // TOUCH_INTERRUPT_ENABLED
 
 	#endif // COMPILE_TOUCH_FUNCTIONS
+
+	#if USE_INTERRUPT_FOR_BUTTON == 1
+	buttonInitInterrupt();
+	#endif
 }
+
+
+/* LCD */
 
 void LCD_Visual_Demo(void)
 {
@@ -189,3 +199,34 @@ void EXTI15_10_IRQHandler()
 #endif // TOUCH_INTERRUPT_ENABLED
 #endif // COMPILE_TOUCH_FUNCTIONS
 
+
+/* BUTTON */
+
+#if USE_INTERRUPT_FOR_BUTTON == 0
+void buttonInit(){
+	Button_Init();
+}
+
+void executeButtonPollingRoutine(){
+	if(Button_IsPressed()){
+		//activateGreenLED();
+	}
+	else{
+		//deactivateGreenLED();
+	}
+}
+#endif
+
+#if USE_INTERRUPT_FOR_BUTTON == 1
+void buttonInitInterrupt(){
+	Button_InterruptInit();
+}
+#endif
+
+void EXTI0_IRQHandler(){
+	IRQ_DisableInterrupt(EXTI0_IRQ_NUMBER);
+	addSchedulerEvent(ROTATE_BLOCK_EVENT);
+	LCD_Clear(0, LCD_COLOR_RED);
+	ClearPendingEXTIInterrupt(BUTTON_PIN);
+	IRQ_EnableInterrupt(EXTI0_IRQ_NUMBER);
+}

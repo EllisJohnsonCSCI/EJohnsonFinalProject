@@ -508,27 +508,34 @@ void screen2(void){
 
 	LCD_DisplayChar(110,40,'2');
 
-	//Border
+	// Border
 	LCD_Draw_Rectangle_Empty(30,10,180,300,LCD_COLOR_BLACK);
 
-	//RNG to choose a block
-	//HAL_RNG_Init();
-	//uint32_t generatedNum = HAL_RNG_GenerateRandomNumber();
-	//LCD_DisplayChar(110,40,generatedNum);	//might not work without casting to uint8_t
+	// RNG to choose a block
+		//Display block
 
-	//Display block
-
-	//Ensure timer works
+	// Ensure timer works
 		//Counts, overflows, triggers interrupt, 3 sec intervals
-	//Figure out moving the block downward
+	// Figure out moving the block downward
 	//on timer overflow
 
-	//Figure out block stacking & collision
+	// Figure out block stacking & collision
 
-	//Figure out moving block from side to side
+	// Figure out moving block from side to side
 
-	//Ensure button interrupt works
-	//Figure out rotate block on button interrupt
+	// Ensure button interrupt works
+
+	uint8_t eventsToRun = 0;
+
+	while(1){
+		eventsToRun = getScheduledEvents();
+		if(eventsToRun & ROTATE_BLOCK_EVENT){
+			// Rotate
+		}
+		if(eventsToRun & APP_DELAY_FLAG_EVENT){
+			HAL_Delay(5000); // Maybe shorter
+		}
+	}
 }
 
 void screen3(void){
