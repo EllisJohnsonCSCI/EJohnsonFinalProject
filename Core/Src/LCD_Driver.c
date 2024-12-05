@@ -514,6 +514,7 @@ void screen2(void){
 	// RNG to choose a block
 		//Display block
 
+	//vv uncommenting this seems to break touchscreen left/right
 	/*
 	uint8_t eventsToRun = 0;
 
@@ -528,6 +529,9 @@ void screen2(void){
 		if(eventsToRun & BLOCK_RIGHT_EVENT){
 			// Move block right
 		}
+		if(eventsToRun & BLOCK_DOWN_EVENT){
+			// Move block down
+		}
 		if(eventsToRun & APP_DELAY_FLAG_EVENT){
 			HAL_Delay(5000); // Maybe shorter
 		}
@@ -540,8 +544,8 @@ void screen2(void){
 
 	// Ensure timer works
 		//Counts, overflows, triggers interrupt, 3 sec intervals
-	// Figure out moving the block downward
-	//on timer overflow
+	//open .ioc, open firmware for system clock override, compare the two
+	//ioc has apb prescalers corresponding to divider members of clock config struct
 }
 
 void screen3(void){
