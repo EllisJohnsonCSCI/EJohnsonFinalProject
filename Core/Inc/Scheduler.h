@@ -15,6 +15,8 @@
 
 #define APP_DELAY_FLAG_EVENT (0x1 << 0)
 #define ROTATE_BLOCK_EVENT (0x1 << 1)
+#define BLOCK_LEFT_EVENT (0x1 << 2)
+#define BLOCK_RIGHT_EVENT (0x1 << 3)
 
 
 // FUNCTION PROTOTYPES

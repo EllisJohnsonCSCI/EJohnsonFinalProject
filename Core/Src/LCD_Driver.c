@@ -514,17 +514,7 @@ void screen2(void){
 	// RNG to choose a block
 		//Display block
 
-	// Ensure timer works
-		//Counts, overflows, triggers interrupt, 3 sec intervals
-	// Figure out moving the block downward
-	//on timer overflow
-
-	// Figure out block stacking & collision
-
-	// Figure out moving block from side to side
-
-	// Ensure button interrupt works
-
+	/*
 	uint8_t eventsToRun = 0;
 
 	while(1){
@@ -532,10 +522,26 @@ void screen2(void){
 		if(eventsToRun & ROTATE_BLOCK_EVENT){
 			// Rotate
 		}
+		if(eventsToRun & BLOCK_LEFT_EVENT){
+			// Move block left
+		}
+		if(eventsToRun & BLOCK_RIGHT_EVENT){
+			// Move block right
+		}
 		if(eventsToRun & APP_DELAY_FLAG_EVENT){
 			HAL_Delay(5000); // Maybe shorter
 		}
 	}
+	*/
+	// Button interrupt doesn't appear to work
+		//check debugger
+
+	// Figure out block stacking & collision
+
+	// Ensure timer works
+		//Counts, overflows, triggers interrupt, 3 sec intervals
+	// Figure out moving the block downward
+	//on timer overflow
 }
 
 void screen3(void){
