@@ -513,8 +513,28 @@ void screen2(void){
 	// Border
 	LCD_Draw_Rectangle_Empty(30,10,180,300,LCD_COLOR_BLACK);
 
-	// RNG to choose a block
-		//Display block
+	//RNG to choose a block
+	/*
+	__HAL_RCC_RNG_CLK_ENABLE();
+	HAL_RNG_Init(&hrng);
+	uint32_t generatedNum = HAL_RNG_GenerateRandomNumber(&hrng, num);
+	LCD_DisplayChar(150,40,generatedNum);	//might not work without casting to uint8_t
+
+	//Display block
+	switch(generatedNum){
+	case 0:
+		LCD_Draw_OBlock(90,250);
+		LCD_Draw_IBlock(105,110);
+		LCD_Draw_SBlock(170,200);
+		LCD_Draw_ZBlock(10,200);
+		LCD_Draw_LBlock(20,10);
+		LCD_Draw_JBlock(190,10);
+		LCD_Draw_TBlock(75,35);
+		break;
+	default:
+		break;
+	}
+	*/
 
 	//vv uncommenting this seems to break touchscreen left/right
 	/*
