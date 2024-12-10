@@ -36,7 +36,7 @@ Core/Src/stm32f4xx_it.o: ../Core/Src/stm32f4xx_it.c ../Core/Inc/main.h \
  ../Core/Inc/ili9341.h ../Core/Inc/fonts.h ../Core/Inc/stmpe811.h \
  ../Core/Inc/Scheduler.h ../Core/Inc/InterruptControl.h \
  ../Core/Inc/Button_Driver.h ../Core/Inc/Timer_Driver.h \
- ../Core/Inc/stm32f4xx_it.h
+ ../Core/Inc/RNG_Driver.h ../Core/Inc/stm32f4xx_it.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -80,4 +80,5 @@ Core/Src/stm32f4xx_it.o: ../Core/Src/stm32f4xx_it.c ../Core/Inc/main.h \
 ../Core/Inc/InterruptControl.h:
 ../Core/Inc/Button_Driver.h:
 ../Core/Inc/Timer_Driver.h:
+../Core/Inc/RNG_Driver.h:
 ../Core/Inc/stm32f4xx_it.h:

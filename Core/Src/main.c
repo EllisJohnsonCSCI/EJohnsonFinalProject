@@ -42,12 +42,9 @@ int main(void){
 	HAL_Delay(5000);
 
 	/* TEST RNG */
-	__HAL_RCC_RNG_CLK_ENABLE();
-
 	while(1){
-		// where to get hrng?
-		HAL_RNG_Init(&hrng);
-		uint32_t generatedNum = HAL_RNG_GenerateRandomNumber(&hrng, num);
+		RNG_Init();
+		uint32_t generatedNum = RNG_Generate();
 		LCD_DisplayChar(150, 40, generatedNum);	//might not work without casting to uint8_t
 
 		//Display block
@@ -64,34 +61,7 @@ int main(void){
 		default:
 			break;
 		}
-		HAL_RNG_DeInit(&hrng);
-	}
-	/* DONE TEST */
-
-	/* TEST RNG */
-	__HAL_RCC_RNG_CLK_ENABLE();
-
-	while(1){
-		// where to get hrng?
-		HAL_RNG_Init(&hrng);
-		uint32_t generatedNum = HAL_RNG_GenerateRandomNumber(&hrng, num);
-		LCD_DisplayChar(150, 40, generatedNum);	//might not work without casting to uint8_t
-
-		//Display block
-		switch(generatedNum){
-		case 0:
-			LCD_Draw_OBlock(90,250);
-			LCD_Draw_IBlock(105,110);
-			LCD_Draw_SBlock(170,200);
-			LCD_Draw_ZBlock(10,200);
-			LCD_Draw_LBlock(20,10);
-			LCD_Draw_JBlock(190,10);
-			LCD_Draw_TBlock(75,35);
-			break;
-		default:
-			break;
-		}
-		HAL_RNG_DeInit(&hrng);
+		RNG_DeInit();
 	}
 	/* DONE TEST */
 

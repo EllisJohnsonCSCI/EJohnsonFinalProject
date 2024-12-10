@@ -2,6 +2,7 @@
 "./Core/Src/Button_Driver.o"
 "./Core/Src/InterruptControl.o"
 "./Core/Src/LCD_Driver.o"
+"./Core/Src/RNG_Driver.o"
 "./Core/Src/Scheduler.o"
 "./Core/Src/Timer_Driver.o"
 "./Core/Src/fonts.o"

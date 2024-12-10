@@ -9,6 +9,7 @@
 #include "stm32f4xx_hal.h"
 #include "Button_Driver.h"
 #include "Timer_Driver.h"
+#include "RNG_Driver.h"
 #include "Scheduler.h"
 
 #include <stdio.h>
