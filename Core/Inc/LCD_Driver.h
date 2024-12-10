@@ -13,6 +13,8 @@
 #include "ili9341.h"
 #include "fonts.h"
 #include "stmpe811.h"
+#include "Scheduler.h"
+#include "InterruptControl.h"
 
 #define COMPILE_TOUCH_FUNCTIONS COMPILE_TOUCH
 #define TOUCH_INTERRUPT_ENABLED COMPILE_TOUCH_INTERRUPT_SUPPORT

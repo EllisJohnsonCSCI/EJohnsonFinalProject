@@ -37,10 +37,7 @@ int main(void){
 	// The default system configuration function is "suspect" so we need to make our own clock configuration
 	// Note - You, the developer, MAY have to play with some of this configuration as you progress in your project
 	SystemClockOverride();
-
-	ApplicationInit(); // Initializes the LCD functionality
-
-	//LCD_Visual_Demo();
+	ApplicationInit();
 
 	HAL_Delay(5000);
 
@@ -71,11 +68,35 @@ int main(void){
 	}
 	/* DONE TEST */
 
-	screen1();
+	/* TEST RNG */
+	__HAL_RCC_RNG_CLK_ENABLE();
 
-	// DO NOT CALL THIS FUNCTION WHEN INTERRUPT MODE IS SELECTED IN THE COMPILE SWITCH IN stmpe811.h
-	// Un-comment the below function after setting COMPILE_TOUCH to 1 in stmpe811.h
-	//LCD_Touch_Polling_Demo(); // This function Will not return
+	while(1){
+		// where to get hrng?
+		HAL_RNG_Init(&hrng);
+		uint32_t generatedNum = HAL_RNG_GenerateRandomNumber(&hrng, num);
+		LCD_DisplayChar(150, 40, generatedNum);	//might not work without casting to uint8_t
+
+		//Display block
+		switch(generatedNum){
+		case 0:
+			LCD_Draw_OBlock(90,250);
+			LCD_Draw_IBlock(105,110);
+			LCD_Draw_SBlock(170,200);
+			LCD_Draw_ZBlock(10,200);
+			LCD_Draw_LBlock(20,10);
+			LCD_Draw_JBlock(190,10);
+			LCD_Draw_TBlock(75,35);
+			break;
+		default:
+			break;
+		}
+		HAL_RNG_DeInit(&hrng);
+	}
+	/* DONE TEST */
+
+	Timer_StartInterrupt();
+	screen1();
 
 	while(1){
 		//

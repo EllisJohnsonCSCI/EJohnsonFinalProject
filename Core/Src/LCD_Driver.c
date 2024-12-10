@@ -205,8 +205,10 @@ void LTCD__Init(void)
  * All drawing consists of is manipulating the array.
  * Adding input sanitation should probably be done.
  */
-void LCD_Draw_Pixel(uint16_t x, uint16_t y, uint16_t color)
-{
+void LCD_Draw_Pixel(uint16_t x, uint16_t y, uint16_t color){
+	if(x<0 || x>239 || y<0 || y>319){
+		return;
+	}
 	frameBuffer[y*LCD_PIXEL_WIDTH+x] = color;  //You cannot do x*y to set the pixel.
 }
 
@@ -508,7 +510,7 @@ void screen2(void){
 
 	LCD_DisplayChar(110,40,'2');
 
-	//Border
+	// Border
 	LCD_Draw_Rectangle_Empty(30,10,180,300,LCD_COLOR_BLACK);
 
 	//RNG to choose a block
@@ -534,17 +536,38 @@ void screen2(void){
 	}
 	*/
 
-	//Ensure timer works
+	//vv uncommenting this seems to break touchscreen left/right
+	/*
+	uint8_t eventsToRun = 0;
+
+	while(1){
+		eventsToRun = getScheduledEvents();
+		if(eventsToRun & ROTATE_BLOCK_EVENT){
+			// Rotate
+		}
+		if(eventsToRun & BLOCK_LEFT_EVENT){
+			// Move block left
+		}
+		if(eventsToRun & BLOCK_RIGHT_EVENT){
+			// Move block right
+		}
+		if(eventsToRun & BLOCK_DOWN_EVENT){
+			// Move block down
+		}
+		if(eventsToRun & APP_DELAY_FLAG_EVENT){
+			HAL_Delay(5000); // Maybe shorter
+		}
+	}
+	*/
+	// Button interrupt doesn't appear to work
+		//check debugger
+
+	// Figure out block stacking & collision
+
+	// Ensure timer works
 		//Counts, overflows, triggers interrupt, 3 sec intervals
-	//Figure out moving the block downward
-	//on timer overflow
-
-	//Figure out block stacking & collision
-
-	//Figure out moving block from side to side
-
-	//Ensure button interrupt works
-	//Figure out rotate block on button interrupt
+	//open .ioc, open firmware for system clock override, compare the two
+	//ioc has apb prescalers corresponding to divider members of clock config struct
 }
 
 void screen3(void){
