@@ -7,14 +7,14 @@
 
 #include "../Inc/Timer_Driver.h"
 
-extern TIM_HandleTypeDef htim6;
+TIM_HandleTypeDef htim6;
 
 
 // FUNCTIONS
 
 void Timer_Init(){
 	HAL_TIM_Base_Init(&htim6);
-	Timer_Reset(&htim6);
+	Timer_Reset();
 }
 
 #if USE_INTERRUPT_FOR_TIMER == 0

@@ -205,8 +205,10 @@ void LTCD__Init(void)
  * All drawing consists of is manipulating the array.
  * Adding input sanitation should probably be done.
  */
-void LCD_Draw_Pixel(uint16_t x, uint16_t y, uint16_t color)
-{
+void LCD_Draw_Pixel(uint16_t x, uint16_t y, uint16_t color){
+	if(x<0 || x>239 || y<0 || y>319){
+		return;
+	}
 	frameBuffer[y*LCD_PIXEL_WIDTH+x] = color;  //You cannot do x*y to set the pixel.
 }
 
