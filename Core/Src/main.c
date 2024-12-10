@@ -37,11 +37,11 @@ int main(void){
 	// The default system configuration function is "suspect" so we need to make our own clock configuration
 	// Note - You, the developer, MAY have to play with some of this configuration as you progress in your project
 	SystemClockOverride();
-
-	ApplicationInit(); // Initializes the LCD functionality
+	ApplicationInit();
 
 	HAL_Delay(5000);
 
+	Timer_StartInterrupt();
 	screen1();
 
 	while(1){

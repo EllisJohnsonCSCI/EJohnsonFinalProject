@@ -12,6 +12,7 @@
 uint8_t screenCount = 0;
 
 extern void initialise_monitor_handles(void); 
+extern TIM_HandleTypeDef htim6;
 
 #if COMPILE_TOUCH_FUNCTIONS == 1
 static STMPE811_TouchData StaticTouchData;
@@ -24,8 +25,7 @@ void LCDTouchScreenInterruptGPIOInit(void);
 
 /* GENERAL */
 
-void ApplicationInit(void)
-{
+void ApplicationInit(void){
 	initialise_monitor_handles(); // Allows printf functionality
     LTCD__Init();
     LTCD_Layer_Init(0);
@@ -47,19 +47,21 @@ void ApplicationInit(void)
 	#if USE_INTERRUPT_FOR_BUTTON == 1
 	buttonInitInterrupt();
 	#endif
+
+	#if USE_INTERRUPT_FOR_TIMER == 1
+	timerInit();
+	#endif
 }
 
 
 /* LCD */
 
-void LCD_Visual_Demo(void)
-{
+void LCD_Visual_Demo(void){
 	visualDemo();
 }
 
 #if COMPILE_TOUCH_FUNCTIONS == 1
-void LCD_Touch_Polling_Demo(void)
-{
+void LCD_Touch_Polling_Demo(void){
 	LCD_Clear(0,LCD_COLOR_GREEN);
 
 	while (1) {
@@ -80,8 +82,7 @@ void LCD_Touch_Polling_Demo(void)
 // TouchScreen Interrupt
 #if TOUCH_INTERRUPT_ENABLED == 1
 
-void LCDTouchScreenInterruptGPIOInit(void)
-{
+void LCDTouchScreenInterruptGPIOInit(void){
 	GPIO_InitTypeDef LCDConfig = {0};
     LCDConfig.Pin = GPIO_PIN_15;
     LCDConfig.Mode = GPIO_MODE_IT_RISING_FALLING;
@@ -105,8 +106,7 @@ void LCDTouchScreenInterruptGPIOInit(void)
 
 static uint8_t statusFlag;
 
-void EXTI15_10_IRQHandler()
-{
+void EXTI15_10_IRQHandler(){
 	HAL_NVIC_DisableIRQ(EXTI15_10_IRQn); // May consider making this a universal interrupt guard
 	bool isTouchDetected = false;
 
@@ -235,8 +235,14 @@ void EXTI0_IRQHandler(){
 
 /* TIMER */
 
+void timerInit(){
+	Timer_Init();
+}
+
 void TIM6_IRQHandler(void){
 	HAL_TIM_IRQHandler(&htim6);
 
 	LCD_Clear(0, LCD_COLOR_GREEN);
+	HAL_Delay(5000);
+	LCD_Clear(0, LCD_COLOR_WHITE);
 }

@@ -8,11 +8,10 @@
 #include "LCD_Driver.h"
 #include "stm32f4xx_hal.h"
 #include "Button_Driver.h"
+#include "Timer_Driver.h"
 #include "Scheduler.h"
 
 #include <stdio.h>
-
-#define USE_INTERRUPT_FOR_BUTTON 1
 
 #ifndef INC_APPLICATIONCODE_H_
 #define INC_APPLICATIONCODE_H_
@@ -33,3 +32,5 @@ void executeButtonPollingRoutine();
 #if USE_INTERRUPT_FOR_BUTTON == 1
 void buttonInitInterrupt();
 #endif
+
+void timerInit();

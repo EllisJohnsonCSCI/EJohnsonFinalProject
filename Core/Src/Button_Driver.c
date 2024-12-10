@@ -7,7 +7,7 @@
 
 #include "../Inc/Button_Driver.h"
 
-
+#if USE_INTERRUPT_FOR_BUTTON == 0
 void Button_Init(){
 	GPIO_InitTypeDef ButtonConfig = {};
 
@@ -18,6 +18,7 @@ void Button_Init(){
 	Button_ClockEnable();
 	HAL_GPIO_Init(BUTTON_PORT, &ButtonConfig);
 }
+#endif
 
 void Button_ClockEnable(){
 	__HAL_RCC_GPIOA_CLK_ENABLE();
@@ -36,6 +37,7 @@ bool Button_IsPressed(){
 	}
 }
 
+#if USE_INTERRUPT_FOR_BUTTON == 1
 void Button_InterruptInit(){
 	GPIO_InitTypeDef ButtonConfig = {};
 
@@ -47,3 +49,4 @@ void Button_InterruptInit(){
 	HAL_GPIO_Init(BUTTON_PORT, &ButtonConfig);
 	HAL_NVIC_EnableIRQ(EXTI0_IRQ_NUMBER);
 }
+#endif
