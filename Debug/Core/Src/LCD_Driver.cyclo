@@ -24,10 +24,10 @@
 ../Core/Src/LCD_Driver.c:420:6:visualDemo	4
 ../Core/Src/LCD_Driver.c:466:6:screen1	1
 ../Core/Src/LCD_Driver.c:498:6:screen2	1
-../Core/Src/LCD_Driver.c:547:6:screen3	1
-../Core/Src/LCD_Driver.c:567:6:LCD_Error_Handler	1
-../Core/Src/LCD_Driver.c:582:6:InitializeLCDTouch	2
-../Core/Src/LCD_Driver.c:590:18:returnTouchStateAndLocation	1
-../Core/Src/LCD_Driver.c:595:6:DetermineTouchPosition	1
-../Core/Src/LCD_Driver.c:600:9:ReadRegisterFromTouchModule	1
-../Core/Src/LCD_Driver.c:605:6:WriteDataToTouchModule	1
+../Core/Src/LCD_Driver.c:551:6:screen3	1
+../Core/Src/LCD_Driver.c:571:6:LCD_Error_Handler	1
+../Core/Src/LCD_Driver.c:586:6:InitializeLCDTouch	2
+../Core/Src/LCD_Driver.c:594:18:returnTouchStateAndLocation	1
+../Core/Src/LCD_Driver.c:599:6:DetermineTouchPosition	1
+../Core/Src/LCD_Driver.c:604:9:ReadRegisterFromTouchModule	1
+../Core/Src/LCD_Driver.c:609:6:WriteDataToTouchModule	1

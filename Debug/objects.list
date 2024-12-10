@@ -3,6 +3,7 @@
 "./Core/Src/InterruptControl.o"
 "./Core/Src/LCD_Driver.o"
 "./Core/Src/Scheduler.o"
+"./Core/Src/Timer_Driver.o"
 "./Core/Src/fonts.o"
 "./Core/Src/ili9341.o"
 "./Core/Src/main.o"

@@ -37,17 +37,17 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_rnglists 00000b6a  00000000  00000000  0001bee0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  00026dff  00000000  00000000  0001ca4a  2**0
+ 17 .debug_macro  00026e0b  00000000  00000000  0001ca4a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   00012bcc  00000000  00000000  00043849  2**0
+ 18 .debug_line   00012bcc  00000000  00000000  00043855  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000e1a7b  00000000  00000000  00056415  2**0
+ 19 .debug_str    000e1a97  00000000  00000000  00056421  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  00137e90  2**0
+ 20 .comment      00000043  00000000  00000000  00137eb8  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  0000447c  00000000  00000000  00137ed4  2**2
+ 21 .debug_frame  0000447c  00000000  00000000  00137efc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 0000006a  00000000  00000000  0013c350  2**0
+ 22 .debug_line_str 0000006a  00000000  00000000  0013c378  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -2286,8 +2286,8 @@ void screen2(void){
 
 	// Ensure timer works
 		//Counts, overflows, triggers interrupt, 3 sec intervals
-	// Figure out moving the block downward
-	//on timer overflow
+	//open .ioc, open firmware for system clock override, compare the two
+	//ioc has apb prescalers corresponding to divider members of clock config struct
 }
  800116e:	bf00      	nop
  8001170:	46bd      	mov	sp, r7
