@@ -11,7 +11,7 @@
 #include "ApplicationCode.h"
 
 #define TESTING_RNG		0
-#define TESTING_BUTTON	0
+#define TESTING_BUTTON	1
 #define TESTING_TIMER	0
 #define TESTING_LCD		0
 
@@ -25,6 +25,7 @@ void testRNG();
 /* TIMER */
 // Turns on?
 // Generates interrupt on overflow?
+void testTimer();
 
 /* LCD */
 

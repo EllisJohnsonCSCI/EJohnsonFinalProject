@@ -43,7 +43,8 @@ void Button_InterruptInit(){
 
 	ButtonConfig.Pin = BUTTON_PIN;
 	ButtonConfig.Mode = GPIO_MODE_INPUT;
-	ButtonConfig.Speed = GPIO_SPEED_FREQ_LOW;
+	ButtonConfig.Speed = GPIO_SPEED_FREQ_MEDIUM;
+	ButtonConfig.Pull = GPIO_PULLUP;
 
 	Button_ClockEnable();
 	HAL_GPIO_Init(BUTTON_PORT, &ButtonConfig);

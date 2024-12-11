@@ -15,11 +15,14 @@
 // MACROS
 
 #define USE_INTERRUPT_FOR_TIMER	1
-#define DOUBLE 2
+
+#define PRESCALER	4999
+#define PERIOD		0xFFFF
 
 // FUNCTION PROTOTYPES
 
 void Timer_Init();
+void Timer_ClockControl(uint8_t);
 void Timer_Start();
 void Timer_Stop();
 void Timer_StartInterrupt();

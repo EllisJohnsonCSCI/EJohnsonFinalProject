@@ -48,9 +48,9 @@ int main(void){
 #endif
 
 #if TESTING_BUTTON == 1
-	clearScreen();
 	while(1){
-		//just wait for interrupt
+		LCD_Clear(0, LCD_COLOR_WHITE);
+		HAL_Delay(5000);
 	}
 #endif
 
@@ -58,7 +58,8 @@ int main(void){
 	Timer_StartInterrupt();
 
 	while(1){
-		//just wait for timer overflow
+		LCD_Clear(0, LCD_COLOR_WHITE);
+		HAL_Delay(5000);
 	}
 #endif
 

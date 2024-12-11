@@ -511,11 +511,10 @@ void screen2(void){
 	// Border
 	LCD_Draw_Rectangle_Empty(30,10,180,300,LCD_COLOR_BLACK);
 
-	//RNG to choose a block
+	//RNG
 	/*
-	__HAL_RCC_RNG_CLK_ENABLE();
-	HAL_RNG_Init(&hrng);
-	uint32_t generatedNum = HAL_RNG_GenerateRandomNumber(&hrng, num);
+	RNG_Init();
+	uint32_t generatedNum = RNG_Generate();
 	LCD_DisplayChar(150,40,generatedNum);	//might not work without casting to uint8_t
 
 	//Display block
@@ -532,9 +531,18 @@ void screen2(void){
 	default:
 		break;
 	}
+	RNG_DeInit();
 	*/
 
-	//vv uncommenting this seems to break touchscreen left/right
+	// Timer
+	Timer_StartInterrupt();
+	//3 sec intervals + reset
+	//open .ioc, open firmware for system clock override, compare the two
+	//ioc has apb prescalers corresponding to divider members of clock config struct
+
+	// Button interrupt doesn't work
+
+	//vv uncommenting this seems to break touch screen left/right
 	/*
 	uint8_t eventsToRun = 0;
 
@@ -557,15 +565,8 @@ void screen2(void){
 		}
 	}
 	*/
-	// Button interrupt doesn't appear to work
-		//check debugger
 
 	// Figure out block stacking & collision
-
-	// Ensure timer works
-		//Counts, overflows, triggers interrupt, 3 sec intervals
-	//open .ioc, open firmware for system clock override, compare the two
-	//ioc has apb prescalers corresponding to divider members of clock config struct
 }
 
 void screen3(void){

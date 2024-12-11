@@ -9,11 +9,12 @@
 #ifndef INC_LCD_DRIVER_H_
 #define INC_LCD_DRIVER_H_
 
-#include "stm32f4xx_hal.h"
 #include "ili9341.h"
 #include "fonts.h"
 #include "stmpe811.h"
 #include "Scheduler.h"
+#include "Timer_Driver.h"
+#include "RNG_Driver.h"
 
 #define COMPILE_TOUCH_FUNCTIONS COMPILE_TOUCH
 #define TOUCH_INTERRUPT_ENABLED COMPILE_TOUCH_INTERRUPT_SUPPORT

@@ -1,1 +1,2 @@
-../Core/Src/Testing.c:10:6:testRNG	16	static
+../Core/Src/Testing.c:12:6:testRNG	16	static
+../Core/Src/Testing.c:40:6:testTimer	4	static

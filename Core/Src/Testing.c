@@ -7,6 +7,8 @@
 
 #include "Testing.h"
 
+/* RNG */
+// Generates random numbers?
 void testRNG(){
 	RNG_Init();
 	uint32_t generatedNum = RNG_Generate();
@@ -28,3 +30,15 @@ void testRNG(){
 	}
 	RNG_DeInit();
 }
+
+/* BUTTON */
+// Generates interrupt?
+
+/* TIMER */
+// Turns on?
+// Generates interrupt on overflow?
+void testTimer(){
+	//
+}
+
+/* LCD */

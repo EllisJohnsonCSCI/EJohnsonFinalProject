@@ -13,8 +13,25 @@ TIM_HandleTypeDef htim6;
 // FUNCTIONS
 
 void Timer_Init(){
+	htim6.Instance = TIM6;
+	htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+	htim6.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	htim6.Init.Period = PERIOD;
+	htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
+	htim6.Init.Prescaler = PRESCALER;
+
+	Timer_ClockControl(ENABLE);
 	Timer_Error_Handler(HAL_TIM_Base_Init(&htim6));
 	Timer_Reset();
+}
+
+void Timer_ClockControl(uint8_t enOrDis){
+	if(enOrDis == ENABLE){
+		__HAL_RCC_TIM6_CLK_ENABLE();
+	}
+	else{
+		__HAL_RCC_TIM6_CLK_DISABLE();
+	}
 }
 
 #if USE_INTERRUPT_FOR_TIMER == 0
