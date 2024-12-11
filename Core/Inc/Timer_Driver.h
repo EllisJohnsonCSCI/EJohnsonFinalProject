@@ -9,8 +9,8 @@
 #define TIMER_DRIVER_H_
 
 
-#include "InterruptControl.h"
 #include "stm32f4xx_hal.h"
+#include "ErrorHandling.h"
 
 
 // MACROS

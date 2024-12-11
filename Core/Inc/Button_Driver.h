@@ -10,7 +10,6 @@
 
 #include <stdbool.h>
 
-#include "InterruptControl.h"
 #include "stm32f4xx_hal.h"
 
 
@@ -18,6 +17,7 @@
 
 #define USE_INTERRUPT_FOR_BUTTON 1
 
+#define EXTI0_IRQ_NUMBER 6
 #define BUTTON_PORT	GPIOA
 #define BUTTON_PIN	GPIO_PIN_0
 #define IS_PRESSED	1

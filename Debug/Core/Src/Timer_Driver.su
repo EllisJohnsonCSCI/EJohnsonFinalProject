@@ -1,6 +1,6 @@
 ../Core/Src/Timer_Driver.c:15:6:Timer_Init	8	static
-../Core/Src/Timer_Driver.c:31:6:Timer_StartInterrupt	8	static
-../Core/Src/Timer_Driver.c:35:6:Timer_StopInterrupt	8	static
-../Core/Src/Timer_Driver.c:40:6:Timer_Reset	4	static
-../Core/Src/Timer_Driver.c:44:10:Timer_GetCNT	4	static
-../Core/Src/Timer_Driver.c:48:10:Timer_GetARR	4	static
+../Core/Src/Timer_Driver.c:33:6:Timer_StartInterrupt	8	static
+../Core/Src/Timer_Driver.c:37:6:Timer_StopInterrupt	8	static
+../Core/Src/Timer_Driver.c:42:6:Timer_Reset	4	static
+../Core/Src/Timer_Driver.c:46:10:Timer_GetCNT	4	static
+../Core/Src/Timer_Driver.c:50:10:Timer_GetARR	4	static

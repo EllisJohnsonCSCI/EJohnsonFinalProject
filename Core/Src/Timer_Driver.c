@@ -13,7 +13,9 @@ TIM_HandleTypeDef htim6;
 // FUNCTIONS
 
 void Timer_Init(){
-	HAL_TIM_Base_Init(&htim6);
+	if(HAL_TIM_Base_Init(&htim6) != HAL_OK){
+		APPLICATION_ASSERT(NOT_OK);
+	}
 	Timer_Reset();
 }
 
