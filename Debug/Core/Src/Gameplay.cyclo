@@ -1,0 +1,4 @@
+../Core/Src/Gameplay.c:16:6:screen1	1
+../Core/Src/Gameplay.c:47:6:screen2	1
+../Core/Src/Gameplay.c:98:6:screen3	1
+../Core/Src/Gameplay.c:116:6:drawBlock	8

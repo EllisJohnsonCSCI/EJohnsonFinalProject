@@ -49,7 +49,7 @@ int main(void){
 
 #if TESTING_BUTTON == 1
 	while(1){
-		LCD_Clear(0, LCD_COLOR_WHITE);
+		clearScreen();
 		HAL_Delay(5000);
 	}
 #endif
@@ -58,10 +58,27 @@ int main(void){
 	Timer_StartInterrupt();
 
 	while(1){
-		LCD_Clear(0, LCD_COLOR_WHITE);
+		clearScreen();
 		HAL_Delay(5000);
 	}
 #endif
+
+#if TESTING_LCD == 1
+	testString();
+	testMove();
+	testRotate();
+	while(1){
+		//
+	}
+#endif
+
+	// Test vals for HAL_delay
+	while(1){
+		LCD_Clear(0, LCD_COLOR_CYAN);
+		HAL_Delay(5000);
+		clearScreen();
+		HAL_Delay(5000);
+	}
 
 	screen1();
 

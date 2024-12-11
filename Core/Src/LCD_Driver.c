@@ -141,8 +141,7 @@ void LTCD_Layer_Init(uint8_t LayerIndex)
 	}
 }
 
-void clearScreen(void)
-{
+void clearScreen(void){
   LCD_Clear(0,LCD_COLOR_WHITE);
 }
 
@@ -206,7 +205,7 @@ void LTCD__Init(void)
  * Adding input sanitation should probably be done.
  */
 void LCD_Draw_Pixel(uint16_t x, uint16_t y, uint16_t color){
-	if(x<0 || x>239 || y<0 || y>319){
+	if(x < 0 || x > 239 || y < 0 || y > 319){
 		return;
 	}
 	frameBuffer[y*LCD_PIXEL_WIDTH+x] = color;  //You cannot do x*y to set the pixel.
@@ -215,7 +214,7 @@ void LCD_Draw_Pixel(uint16_t x, uint16_t y, uint16_t color){
 /*
  * These functions are simple examples. Most computer graphics like OpenGl and stm's graphics library use a state machine. Where you first call some function like SetColor(color), SetPosition(x,y), then DrawSqure(size)
  * Instead all of these are explicit where color, size, and position are passed in.
- * There is tons of ways to handle drawing. I dont think it matters too much.
+ * There is tons of ways to handle drawing. I don't think it matters too much.
  */
 void LCD_Draw_Circle_Fill(uint16_t Xpos, uint16_t Ypos, uint16_t radius, uint16_t color)
 {
@@ -231,37 +230,34 @@ void LCD_Draw_Circle_Fill(uint16_t Xpos, uint16_t Ypos, uint16_t radius, uint16_
     }
 }
 
-void LCD_Draw_Vertical_Line(uint16_t x, uint16_t y, uint16_t len, uint16_t color)
-{
-  for (uint16_t i = 0; i < len; i++)
-  {
-	  LCD_Draw_Pixel(x, i+y, color);
-  }
+void LCD_Draw_Vertical_Line(uint16_t x, uint16_t y, uint16_t len, uint16_t color){
+	for (uint16_t i = 0; i < len; i++){
+		LCD_Draw_Pixel(x, i+y, color);
+	}
 }
 
-void LCD_Draw_Horizontal_Line(uint16_t x, uint16_t y, uint16_t len, uint16_t color)
-{
-  for (uint16_t i = 0; i < len; i++)
-  {
-	  LCD_Draw_Pixel(i+x, y, color);
-  }
+void LCD_Draw_Horizontal_Line(uint16_t x, uint16_t y, uint16_t len, uint16_t color){
+	for (uint16_t i = 0; i < len; i++){
+		LCD_Draw_Pixel(i+x, y, color);
+	}
 }
 
-void LCD_Clear(uint8_t LayerIndex, uint16_t Color)
-{
-	if (LayerIndex == 0){
-		for (uint32_t i = 0; i < LCD_PIXEL_WIDTH * LCD_PIXEL_HEIGHT; i++){
+void LCD_Clear(uint8_t LayerIndex, uint16_t Color){
+	if(LayerIndex == 0){
+		for(uint32_t i = 0; i < LCD_PIXEL_WIDTH * LCD_PIXEL_HEIGHT; i++){
 			frameBuffer[i] = Color;
 		}
 	}
-  // TODO: Add more Layers if needed
+	else if(LayerIndex == 1){
+		for(uint32_t i = 0; i < LCD_PIXEL_WIDTH * LCD_PIXEL_HEIGHT; i++){
+			frameBuffer[i] = Color;
+		}
+	}
+	// What differentiates different layers?
+	// Can you tag each pixel with a certain layer?
 }
 
 void LCD_Draw_Rectangle_Empty(uint16_t Xpos, uint16_t Ypos, uint16_t len, uint16_t height, uint16_t color){
-	//draw vertical x,y,height
-	//draw vertical x+length,y,height
-	//draw horizontal x,y,length
-	//draw horizontal x,y+height,length
 	LCD_Draw_Vertical_Line(Xpos,Ypos,height,color);
 	LCD_Draw_Vertical_Line(Xpos+len,Ypos,height,color);
 	LCD_Draw_Horizontal_Line(Xpos,Ypos,len,color);
@@ -276,33 +272,101 @@ void LCD_Draw_Rectangle_Fill(uint16_t Xpos, uint16_t Ypos, uint16_t len, uint16_
 }
 
 void LCD_Draw_OBlock(uint16_t Xpos, uint16_t Ypos){
+	//All orientations same
 	LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*2,BLOCK_LENGTH*2,LCD_COLOR_YELLOW);
 }
-void LCD_Draw_IBlock(uint16_t Xpos, uint16_t Ypos){
-	LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH,BLOCK_LENGTH*4,LCD_COLOR_CYAN);
+void LCD_Draw_IBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation){
+	//2 orientations same
+	switch(orientation){
+	case 0:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH,BLOCK_LENGTH*4,LCD_COLOR_CYAN);
+		break;
+	case 1:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*4,BLOCK_LENGTH,LCD_COLOR_CYAN);
+		break;
+	default:
+		break;
+	}
 }
-void LCD_Draw_SBlock(uint16_t Xpos, uint16_t Ypos){
-	LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*2,BLOCK_LENGTH,LCD_COLOR_RED);
-	LCD_Draw_Rectangle_Fill(Xpos-BLOCK_LENGTH,Ypos+BLOCK_LENGTH,BLOCK_LENGTH*2,BLOCK_LENGTH,LCD_COLOR_RED);
+void LCD_Draw_SBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation){
+	switch(orientation){
+	case 0:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*2,BLOCK_LENGTH,LCD_COLOR_RED);
+		LCD_Draw_Rectangle_Fill(Xpos-BLOCK_LENGTH,Ypos+BLOCK_LENGTH,BLOCK_LENGTH*2,BLOCK_LENGTH,LCD_COLOR_RED);
+		break;
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	default:
+		break;
+	}
 }
-void LCD_Draw_ZBlock(uint16_t Xpos, uint16_t Ypos){
-	LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*2,BLOCK_LENGTH,LCD_COLOR_GREEN);
-	LCD_Draw_Rectangle_Fill(Xpos+BLOCK_LENGTH,Ypos+BLOCK_LENGTH,BLOCK_LENGTH*2,BLOCK_LENGTH,LCD_COLOR_GREEN);
+void LCD_Draw_ZBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation){
+	switch(orientation){
+	case 0:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*2,BLOCK_LENGTH,LCD_COLOR_GREEN);
+		LCD_Draw_Rectangle_Fill(Xpos+BLOCK_LENGTH,Ypos+BLOCK_LENGTH,BLOCK_LENGTH*2,BLOCK_LENGTH,LCD_COLOR_GREEN);
+		break;
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	default:
+		break;
+	}
 }
-void LCD_Draw_LBlock(uint16_t Xpos, uint16_t Ypos){
-	//orange
-	LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH,BLOCK_LENGTH*3,LCD_COLOR_BLUE2);
-	LCD_Draw_Rectangle_Fill(Xpos+BLOCK_LENGTH,Ypos+(BLOCK_LENGTH*2),BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_BLUE2);
+void LCD_Draw_LBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation){
+	switch(orientation){
+	case 0:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH,BLOCK_LENGTH*3,LCD_COLOR_ORANGE);
+		LCD_Draw_Rectangle_Fill(Xpos+BLOCK_LENGTH,Ypos+(BLOCK_LENGTH*2),BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_ORANGE);
+		break;
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	default:
+		break;
+	}
 }
-void LCD_Draw_JBlock(uint16_t Xpos, uint16_t Ypos){
-	//pink
-	LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH,BLOCK_LENGTH*3,LCD_COLOR_MAGENTA);
-	LCD_Draw_Rectangle_Fill(Xpos-BLOCK_LENGTH,Ypos+(BLOCK_LENGTH*2),BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_MAGENTA);
+void LCD_Draw_JBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation){
+	switch(orientation){
+	case 0:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH,BLOCK_LENGTH*3,LCD_COLOR_PINK);
+		LCD_Draw_Rectangle_Fill(Xpos-BLOCK_LENGTH,Ypos+(BLOCK_LENGTH*2),BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_PINK);
+		break;
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	default:
+		break;
+	}
 }
-void LCD_Draw_TBlock(uint16_t Xpos, uint16_t Ypos){
-	//purple
-	LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*3,BLOCK_LENGTH,LCD_COLOR_GREY);
-	LCD_Draw_Rectangle_Fill(Xpos+BLOCK_LENGTH,Ypos+BLOCK_LENGTH,BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_GREY);
+void LCD_Draw_TBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation){
+	switch(orientation){
+	case 0:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*3,BLOCK_LENGTH,LCD_COLOR_PURPLE);
+		LCD_Draw_Rectangle_Fill(Xpos+BLOCK_LENGTH,Ypos+BLOCK_LENGTH,BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_PURPLE);
+		break;
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	default:
+		break;
+	}
 }
 
 //This was taken and adapted from stm32's mcu code
@@ -463,126 +527,6 @@ void visualDemo(void)
 	LCD_DisplayChar(125,160,'r');
 	LCD_DisplayChar(130,160,'l');
 	LCD_DisplayChar(140,160,'d');
-}
-
-void screen1(void){
-	clearScreen();
-
-	//Show all blocks
-	LCD_Draw_OBlock(90,250);
-	LCD_Draw_IBlock(105,110);
-	LCD_Draw_SBlock(170,200);
-	LCD_Draw_ZBlock(10,200);
-	LCD_Draw_LBlock(20,10);
-	LCD_Draw_JBlock(190,10);
-	LCD_Draw_TBlock(75,35);
-
-	//"Tetris"
-	LCD_SetTextColor(LCD_COLOR_BLACK);
-	LCD_SetFont(&Font16x24);
-
-	LCD_DisplayChar(80,40,'T');
-	LCD_DisplayChar(95,40,'E');
-	LCD_DisplayChar(110,40,'T');
-	LCD_DisplayChar(125,40,'R');
-	LCD_DisplayChar(135,40,'I');
-	LCD_DisplayChar(145,40,'S');
-
-	//Start button
-	LCD_DisplayChar(95,200,'S');
-	LCD_DisplayChar(105,200,'t');
-	LCD_DisplayChar(115,200,'a');
-	LCD_DisplayChar(125,200,'r');
-	LCD_DisplayChar(132,200,'t');
-	LCD_Draw_Rectangle_Empty(70,160,100,100,LCD_COLOR_BLACK);
-}
-
-void screen2(void){
-	//320 = bottom of screen
-	//250 = right of screen
-	//10 tall x 6 wide
-	//30*10 = 300
-	//30*6 = 180
-	LCD_SetTextColor(LCD_COLOR_BLACK);
-	LCD_SetFont(&Font16x24);
-
-	clearScreen();
-
-	// Border
-	LCD_Draw_Rectangle_Empty(30,10,180,300,LCD_COLOR_BLACK);
-
-	//RNG
-	/*
-	RNG_Init();
-	uint32_t generatedNum = RNG_Generate();
-	LCD_DisplayChar(150,40,generatedNum);	//might not work without casting to uint8_t
-
-	//Display block
-	switch(generatedNum){
-	case 0:
-		LCD_Draw_OBlock(90,250);
-		LCD_Draw_IBlock(105,110);
-		LCD_Draw_SBlock(170,200);
-		LCD_Draw_ZBlock(10,200);
-		LCD_Draw_LBlock(20,10);
-		LCD_Draw_JBlock(190,10);
-		LCD_Draw_TBlock(75,35);
-		break;
-	default:
-		break;
-	}
-	RNG_DeInit();
-	*/
-
-	// Timer
-	Timer_StartInterrupt();
-	//3 sec intervals + reset
-	//open .ioc, open firmware for system clock override, compare the two
-	//ioc has apb prescalers corresponding to divider members of clock config struct
-
-	// Button interrupt doesn't work
-
-	//vv uncommenting this seems to break touch screen left/right
-	/*
-	uint8_t eventsToRun = 0;
-
-	while(1){
-		eventsToRun = getScheduledEvents();
-		if(eventsToRun & ROTATE_BLOCK_EVENT){
-			// Rotate
-		}
-		if(eventsToRun & BLOCK_LEFT_EVENT){
-			// Move block left
-		}
-		if(eventsToRun & BLOCK_RIGHT_EVENT){
-			// Move block right
-		}
-		if(eventsToRun & BLOCK_DOWN_EVENT){
-			// Move block down
-		}
-		if(eventsToRun & APP_DELAY_FLAG_EVENT){
-			HAL_Delay(5000); // Maybe shorter
-		}
-	}
-	*/
-
-	// Figure out block stacking & collision
-}
-
-void screen3(void){
-	LCD_SetTextColor(LCD_COLOR_BLACK);
-	LCD_SetFont(&Font16x24);
-
-	clearScreen();
-
-	//Disable all interrupts
-
-	//Display time
-	LCD_DisplayChar(80,40,'3');
-
-	//Get time from prev screen
-
-	//(COULD do a main menu button)
 }
 
 /**

@@ -13,12 +13,14 @@
 #define TESTING_RNG		1
 #define TESTING_BUTTON	0
 #define TESTING_TIMER	0
-#define TESTING_LCD		0
+#define TESTING_LCD		1
 
 // RNG
 void testRNG();
 
 // LCD
-
+void testString();
+void testMove();
+void testRotate();
 
 #endif /* INC_TESTING_H_ */

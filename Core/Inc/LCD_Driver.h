@@ -35,6 +35,9 @@
 #define LCD_COLOR_GREEN         0x07E0
 #define LCD_COLOR_CYAN          0x7FFF
 #define LCD_COLOR_YELLOW        0xFFE0
+#define LCD_COLOR_ORANGE        0xFBA0
+#define LCD_COLOR_PINK			0xFAF3
+#define LCD_COLOR_PURPLE        0xB81F
 
 #define BLOCK_LENGTH			30
 
@@ -62,6 +65,10 @@
 void LTCD__Init(void);
 void LTCD_Layer_Init(uint8_t LayerIndex);
 
+// Whole screen
+void LCD_Clear(uint8_t LayerIndex, uint16_t Color);
+void clearScreen(void);
+
 // Draw Text
 void LCD_DrawChar(uint16_t Xpos, uint16_t Ypos, const uint16_t *c);
 void LCD_DisplayChar(uint16_t Xpos, uint16_t Ypos, uint8_t Ascii);
@@ -75,29 +82,24 @@ void LCD_Draw_Circle_Fill(uint16_t Xpos, uint16_t Ypos, uint16_t radius, uint16_
 // Draw Lines
 void LCD_Draw_Vertical_Line(uint16_t x, uint16_t y, uint16_t len, uint16_t color);
 void LCD_Draw_Horizontal_Line(uint16_t x, uint16_t y, uint16_t len, uint16_t color);
-void LCD_Clear(uint8_t LayerIndex, uint16_t Color);
 
 // Draw Rectangle
 void LCD_Draw_Rectangle_Empty(uint16_t Xpos, uint16_t Ypos, uint16_t len, uint16_t height, uint16_t color);
 void LCD_Draw_Rectangle_Fill(uint16_t Xpos, uint16_t Ypos, uint16_t len, uint16_t height, uint16_t color);
 
-// Draw Tetris shapes
+// Draw Tetrominoes
 void LCD_Draw_OBlock(uint16_t Xpos, uint16_t Ypos);
-void LCD_Draw_IBlock(uint16_t Xpos, uint16_t Ypos);
-void LCD_Draw_SBlock(uint16_t Xpos, uint16_t Ypos);
-void LCD_Draw_ZBlock(uint16_t Xpos, uint16_t Ypos);
-void LCD_Draw_LBlock(uint16_t Xpos, uint16_t Ypos);
-void LCD_Draw_JBlock(uint16_t Xpos, uint16_t Ypos);
-void LCD_Draw_TBlock(uint16_t Xpos, uint16_t Ypos);
+void LCD_Draw_IBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation);
+void LCD_Draw_SBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation);
+void LCD_Draw_ZBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation);
+void LCD_Draw_LBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation);
+void LCD_Draw_JBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation);
+void LCD_Draw_TBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation);
 
 void LCD_Error_Handler(void);
 
 // Demo using provided functions
 void visualDemo(void);
-
-void screen1(void);
-void screen2(void);
-void screen3(void);
 
 void LCD_Error_Handler(void);
 
