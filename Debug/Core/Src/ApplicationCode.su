@@ -4,6 +4,4 @@
 ../Core/Src/ApplicationCode.c:85:6:LCDTouchScreenInterruptGPIOInit	32	static
 ../Core/Src/ApplicationCode.c:109:6:EXTI15_10_IRQHandler	16	static
 ../Core/Src/ApplicationCode.c:221:6:buttonInitInterrupt	8	static
-../Core/Src/ApplicationCode.c:226:6:EXTI0_IRQHandler	8	static
-../Core/Src/ApplicationCode.c:238:6:timerInit	8	static
-../Core/Src/ApplicationCode.c:242:6:TIM6_IRQHandler	8	static
+../Core/Src/ApplicationCode.c:240:6:timerInit	8	static

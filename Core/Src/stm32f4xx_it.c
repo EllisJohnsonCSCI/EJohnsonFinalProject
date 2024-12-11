@@ -208,7 +208,10 @@ void EXTI0_IRQHandler(void)
   /* USER CODE END EXTI0_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(B1_Pin);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
-
+  //addSchedulerEvent(ROTATE_BLOCK_EVENT);
+  LCD_Clear(0, LCD_COLOR_RED);
+  HAL_Delay(5000);
+  LCD_Clear(0, LCD_COLOR_WHITE);
   /* USER CODE END EXTI0_IRQn 1 */
 }
 
@@ -222,7 +225,9 @@ void TIM6_DAC_IRQHandler(void)
   /* USER CODE END TIM6_DAC_IRQn 0 */
   HAL_TIM_IRQHandler(&htim6);
   /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
-
+  LCD_Clear(0, LCD_COLOR_GREEN);
+  HAL_Delay(5000);
+  LCD_Clear(0, LCD_COLOR_WHITE);
   /* USER CODE END TIM6_DAC_IRQn 1 */
 }
 

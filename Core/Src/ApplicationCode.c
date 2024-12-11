@@ -223,26 +223,8 @@ void buttonInitInterrupt(){
 }
 #endif
 
-void EXTI0_IRQHandler(){
-	IRQ_DisableInterrupt(EXTI0_IRQ_NUMBER);
-
-	addSchedulerEvent(ROTATE_BLOCK_EVENT);
-	LCD_Clear(0, LCD_COLOR_RED);
-
-	ClearPendingEXTIInterrupt(BUTTON_PIN);
-	IRQ_EnableInterrupt(EXTI0_IRQ_NUMBER);
-}
-
 /* TIMER */
 
 void timerInit(){
 	Timer_Init();
-}
-
-void TIM6_IRQHandler(void){
-	HAL_TIM_IRQHandler(&htim6);
-
-	LCD_Clear(0, LCD_COLOR_GREEN);
-	HAL_Delay(5000);
-	LCD_Clear(0, LCD_COLOR_WHITE);
 }
