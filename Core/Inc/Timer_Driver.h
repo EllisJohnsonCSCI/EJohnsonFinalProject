@@ -8,7 +8,6 @@
 #ifndef TIMER_DRIVER_H_
 #define TIMER_DRIVER_H_
 
-//#include <stdbool.h>
 
 #include "InterruptControl.h"
 #include "stm32f4xx_hal.h"

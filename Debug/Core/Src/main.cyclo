@@ -1,4 +1,4 @@
-../Core/Src/main.c:32:5:main	2
-../Core/Src/main.c:81:6:SystemClock_Config	3
-../Core/Src/main.c:123:6:SystemClockOverride	1
-../Core/Src/main.c:331:6:Error_Handler	1
+../Core/Src/main.c:32:5:main	1
+../Core/Src/main.c:77:6:SystemClock_Config	3
+../Core/Src/main.c:119:6:SystemClockOverride	1
+../Core/Src/main.c:327:6:Error_Handler	1

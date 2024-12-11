@@ -137,9 +137,9 @@ void EXTI15_10_IRQHandler(){
 	// SCREEN 1 -> 2
 	case 0:
 		//Check if pressing in range of button
-		if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 70, 160, 100, 100)){
+		//if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 70, 160, 100, 100)){
 			// Doesn't work so just ignore button
-		}
+		//}
 		screenCount = 1;
 		screen2();
 		break;

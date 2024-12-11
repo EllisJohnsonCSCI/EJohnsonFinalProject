@@ -30,7 +30,6 @@ void SystemClockOverride(void);
   * @retval int
   */
 int main(void){
-
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
 	HAL_Init();
 
@@ -41,31 +40,28 @@ int main(void){
 
 	HAL_Delay(5000);
 
-	/* TEST RNG */
+#if TESTING_RNG == 1
 	while(1){
-		RNG_Init();
-		uint32_t generatedNum = RNG_Generate();
-		LCD_DisplayChar(150, 40, generatedNum);	//might not work without casting to uint8_t
-
-		//Display block
-		switch(generatedNum){
-		case 0:
-			LCD_Draw_OBlock(90,250);
-			LCD_Draw_IBlock(105,110);
-			LCD_Draw_SBlock(170,200);
-			LCD_Draw_ZBlock(10,200);
-			LCD_Draw_LBlock(20,10);
-			LCD_Draw_JBlock(190,10);
-			LCD_Draw_TBlock(75,35);
-			break;
-		default:
-			break;
-		}
-		RNG_DeInit();
+		testRNG();
+		HAL_Delay(5000);
 	}
-	/* DONE TEST */
+#endif
 
+#if TESTING_BUTTON == 1
+	clearScreen();
+	while(1){
+		//just wait for interrupt
+	}
+#endif
+
+#if TESTING_TIMER == 1
 	Timer_StartInterrupt();
+
+	while(1){
+		//just wait for timer overflow
+	}
+#endif
+
 	screen1();
 
 	while(1){

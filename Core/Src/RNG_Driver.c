@@ -5,7 +5,6 @@
  *      Author: ellis
  */
 
-
 #include "RNG_Driver.h"
 
 RNG_HandleTypeDef hrng;

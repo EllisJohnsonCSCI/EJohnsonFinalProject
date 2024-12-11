@@ -508,8 +508,6 @@ void screen2(void){
 
 	clearScreen();
 
-	LCD_DisplayChar(110,40,'2');
-
 	// Border
 	LCD_Draw_Rectangle_Empty(30,10,180,300,LCD_COLOR_BLACK);
 

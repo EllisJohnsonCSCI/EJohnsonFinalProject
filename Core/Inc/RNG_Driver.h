@@ -9,7 +9,6 @@
 #define INC_RNG_DRIVER_H_
 
 
-//#include "InterruptControl.h"
 #include "stm32f4xx_hal.h"
 
 
