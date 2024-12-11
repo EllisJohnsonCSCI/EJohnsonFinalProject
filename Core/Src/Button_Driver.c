@@ -20,6 +20,22 @@ void Button_Init(){
 }
 #endif
 
+#if USE_INTERRUPT_FOR_BUTTON == 1
+void Button_InterruptInit(){
+	GPIO_InitTypeDef ButtonConfig = {};
+
+	ButtonConfig.Pin = BUTTON_PIN;
+	ButtonConfig.Mode = GPIO_MODE_IT_RISING;
+	ButtonConfig.Speed = GPIO_SPEED_FREQ_MEDIUM;
+	ButtonConfig.Pull = GPIO_NOPULL;
+
+	Button_ClockEnable();
+	HAL_GPIO_Init(BUTTON_PORT, &ButtonConfig);
+	HAL_NVIC_SetPriority(EXTI0_IRQn, 2, 0);
+	HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+}
+#endif
+
 void Button_ClockEnable(){
 	__HAL_RCC_GPIOA_CLK_ENABLE();
 }
@@ -36,18 +52,3 @@ bool Button_IsPressed(){
 		return false;
 	}
 }
-
-#if USE_INTERRUPT_FOR_BUTTON == 1
-void Button_InterruptInit(){
-	GPIO_InitTypeDef ButtonConfig = {};
-
-	ButtonConfig.Pin = BUTTON_PIN;
-	ButtonConfig.Mode = GPIO_MODE_INPUT;
-	ButtonConfig.Speed = GPIO_SPEED_FREQ_MEDIUM;
-	ButtonConfig.Pull = GPIO_PULLUP;
-
-	Button_ClockEnable();
-	HAL_GPIO_Init(BUTTON_PORT, &ButtonConfig);
-	HAL_NVIC_EnableIRQ(EXTI0_IRQ_NUMBER);
-}
-#endif
