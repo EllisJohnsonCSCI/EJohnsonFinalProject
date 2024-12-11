@@ -209,10 +209,10 @@ void buttonInit(){
 
 void executeButtonPollingRoutine(){
 	if(Button_IsPressed()){
-		//activateGreenLED();
+		//
 	}
 	else{
-		//deactivateGreenLED();
+		//
 	}
 }
 #endif

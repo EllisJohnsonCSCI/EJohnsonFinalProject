@@ -16,5 +16,6 @@ void RNG_ClockControl(uint8_t);
 void RNG_Init();
 uint32_t RNG_Generate();
 void RNG_DeInit();
+void RNG_Error_Handler(HAL_StatusTypeDef);
 
 #endif /* INC_RNG_DRIVER_H_ */

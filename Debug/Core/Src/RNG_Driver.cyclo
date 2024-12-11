@@ -2,3 +2,4 @@
 ../Core/Src/RNG_Driver.c:23:6:RNG_Init	1
 ../Core/Src/RNG_Driver.c:28:10:RNG_Generate	1
 ../Core/Src/RNG_Driver.c:34:6:RNG_DeInit	1
+../Core/Src/RNG_Driver.c:39:6:RNG_Error_Handler	2

@@ -13,9 +13,7 @@ TIM_HandleTypeDef htim6;
 // FUNCTIONS
 
 void Timer_Init(){
-	if(HAL_TIM_Base_Init(&htim6) != HAL_OK){
-		APPLICATION_ASSERT(NOT_OK);
-	}
+	Timer_Error_Handler(HAL_TIM_Base_Init(&htim6));
 	Timer_Reset();
 }
 
@@ -31,11 +29,11 @@ void Timer_Stop(){
 
 #if USE_INTERRUPT_FOR_TIMER == 1
 void Timer_StartInterrupt(){
-	HAL_TIM_Base_Start_IT(&htim6);
+	Timer_Error_Handler(HAL_TIM_Base_Start_IT(&htim6));
 }
 
 void Timer_StopInterrupt(){
-	HAL_TIM_Base_Stop_IT(&htim6);
+	Timer_Error_Handler(HAL_TIM_Base_Stop_IT(&htim6));
 }
 #endif
 
@@ -49,4 +47,10 @@ uint32_t Timer_GetCNT(){
 
 uint32_t Timer_GetARR(){
 	return __HAL_TIM_GET_AUTORELOAD(&htim6);
+}
+
+void Timer_Error_Handler(HAL_StatusTypeDef input){
+	if(input != HAL_OK){
+		for(;;);
+	}
 }

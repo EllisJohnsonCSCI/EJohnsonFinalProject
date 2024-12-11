@@ -10,7 +10,6 @@
 
 
 #include "stm32f4xx_hal.h"
-#include "ErrorHandling.h"
 
 
 // MACROS
@@ -28,5 +27,6 @@ void Timer_StopInterrupt();
 void Timer_Reset();
 uint32_t Timer_GetCNT();
 uint32_t Timer_GetARR();
+void Timer_Error_Handler(HAL_StatusTypeDef);
 
 #endif /* TIMER_DRIVER_H_ */

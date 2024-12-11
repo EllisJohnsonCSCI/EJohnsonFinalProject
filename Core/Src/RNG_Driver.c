@@ -22,16 +22,22 @@ void RNG_ClockControl(uint8_t enOrDis){
 
 void RNG_Init(){
 	RNG_ClockControl(ENABLE);
-	HAL_RNG_Init(&hrng);
+	RNG_Error_Handler(HAL_RNG_Init(&hrng));
 }
 
 uint32_t RNG_Generate(){
 	uint32_t num;
-	HAL_RNG_GenerateRandomNumber(&hrng, &num);
+	RNG_Error_Handler(HAL_RNG_GenerateRandomNumber(&hrng, &num));
 	return num;
 }
 
 void RNG_DeInit(){
-	HAL_RNG_DeInit(&hrng);
+	RNG_Error_Handler(HAL_RNG_DeInit(&hrng));
 	RNG_ClockControl(DISABLE);
+}
+
+void RNG_Error_Handler(HAL_StatusTypeDef input){
+	if(input != HAL_OK){
+		for(;;);
+	}
 }
