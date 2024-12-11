@@ -21,6 +21,8 @@ void RNG_ClockControl(uint8_t enOrDis){
 }
 
 void RNG_Init(){
+	hrng.Instance = RNG;
+
 	RNG_ClockControl(ENABLE);
 	RNG_Error_Handler(HAL_RNG_Init(&hrng));
 }

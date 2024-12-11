@@ -12,9 +12,10 @@
 void testRNG(){
 	RNG_Init();
 	uint32_t generatedNum = RNG_Generate();
-	LCD_DisplayChar(150, 40, generatedNum);	//might not work without casting to uint8_t
 
-	//Display block
+	// Display block
+	//Figure out proper algorithm for picking block
+
 	switch(generatedNum){
 	case 0:
 		LCD_Draw_OBlock(90,250);
@@ -28,17 +29,9 @@ void testRNG(){
 	default:
 		break;
 	}
+
+
 	RNG_DeInit();
-}
-
-/* BUTTON */
-// Generates interrupt?
-
-/* TIMER */
-// Turns on?
-// Generates interrupt on overflow?
-void testTimer(){
-	//
 }
 
 /* LCD */

@@ -208,7 +208,6 @@ void EXTI0_IRQHandler(void)
   /* USER CODE END EXTI0_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(B1_Pin);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
-  // Not being triggered
   //addSchedulerEvent(ROTATE_BLOCK_EVENT);
   LCD_Clear(0, LCD_COLOR_RED);
   /* USER CODE END EXTI0_IRQn 1 */
