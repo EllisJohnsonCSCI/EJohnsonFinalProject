@@ -10,6 +10,7 @@
 
 /* Static variables */
 uint8_t screenCount = 0;
+uint8_t touchCount = 0;
 
 extern void initialise_monitor_handles(void); 
 extern TIM_HandleTypeDef htim6;
@@ -175,6 +176,10 @@ void EXTI15_10_IRQHandler(){
 			else if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 125, 0, 125, 320)){
 				// Pressing on right
 				moveBlockRight();
+			}
+			touchCount++;
+			if(touchCount >= 5){
+				addSchedulerEvent(LOSE_EVENT);
 			}
 		}
 		break;

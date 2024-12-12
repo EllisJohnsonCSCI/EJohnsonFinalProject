@@ -67,7 +67,8 @@ int main(void){
 	//testString();
 	//^^ for some reason can't draw chars
 	//testMove();
-	testRotate();
+	//testRotate();
+	testBreakupNum();
 	while(1){
 		//
 	}

@@ -41,7 +41,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-
+extern uint8_t timeCount;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -220,6 +220,7 @@ void TIM7_IRQHandler(void){
 	/* USER CODE END TIM7_IRQn 0 */
 	HAL_TIM_IRQHandler(&htim7);
 	/* USER CODE BEGIN TIM7_IRQn 1 */
+	timeCount++;
 	moveBlockDown();
 
 	uint8_t eventsToRun = getScheduledEvents();
@@ -227,9 +228,14 @@ void TIM7_IRQHandler(void){
 		rotateBlock();
 		removeSchedulerEvent(ROTATE_BLOCK_EVENT);
 	}
-
 	clearScreen();
 	drawBlock();
+
+	if(eventsToRun & LOSE_EVENT){
+		removeSchedulerEvent(LOSE_EVENT);
+		Timer_StopInterrupt();
+		screen3();
+	}
   /* USER CODE END TIM7_IRQn 1 */
 }
 

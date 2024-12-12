@@ -10,6 +10,8 @@
 
 #include "LCD_Driver.h"
 
+#include <stdio.h>
+
 #define STARTING_XPOS	110
 #define STARTING_YPOS	30
 

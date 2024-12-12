@@ -14,6 +14,7 @@
 // MACROS
 
 #define ROTATE_BLOCK_EVENT (0x1 << 0)
+#define LOSE_EVENT (0x1 << 1)
 
 
 // FUNCTION PROTOTYPES

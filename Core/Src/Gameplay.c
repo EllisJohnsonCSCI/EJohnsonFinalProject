@@ -52,7 +52,7 @@ void screen2(void){
 	resetScreen();
 
 	// Border
-	LCD_Draw_Rectangle_Empty(30,10,180,300,LCD_COLOR_BLACK);
+	//LCD_Draw_Rectangle_Empty(30,10,180,300,LCD_COLOR_BLACK);
 
 	// RNG (generate first block)
 	generateBlock();
@@ -60,20 +60,41 @@ void screen2(void){
 	// Timer
 	Timer_StartInterrupt();
 
-	// Determine lose conditions
-	// Get time (see proj4 I think)
+	// Lose conditions = tapping screen 5 times
 
-	// Figure out block stacking & collision
+	// Figure out block stacking & collision (probably too ambitious)
 }
 
 void screen3(void){
 	resetScreen();
 
-	// Disable all interrupts
+	// "Time:"
+	LCD_DisplayChar(80,40,'T');
+	LCD_DisplayChar(90,40,'i');
+	LCD_DisplayChar(100,40,'m');
+	LCD_DisplayChar(115,40,'e');
+	LCD_DisplayChar(125,40,':');
 
 	// Display time
-	//String function working will be nice for this
-	LCD_DisplayChar(80,40,'3');
+	//Divide into individual integers
+	uint8_t num = (timeCount * 3);
+	uint8_t count = 0;
+	if(num/100 >= 1){
+		while(num > 99){
+			num -= 100;
+			count++;
+		}
+	}
+	LCD_DisplayChar(80, 80, count + '0');
+	count = 0;
+	if(num/10 >= 1){
+		while(num > 9){
+			num -= 10;
+			count++;
+		}
+	}
+	LCD_DisplayChar(100, 80, count + '0');
+	LCD_DisplayChar(120, 80, num + '0');
 }
 
 void resetScreen(){

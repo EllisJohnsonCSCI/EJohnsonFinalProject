@@ -1,7 +1,7 @@
-../Core/Src/ApplicationCode.c:28:6:ApplicationInit	8	static
-../Core/Src/ApplicationCode.c:59:6:LCD_Visual_Demo	8	static
-../Core/Src/ApplicationCode.c:64:6:LCD_Touch_Polling_Demo	8	static
-../Core/Src/ApplicationCode.c:85:6:LCDTouchScreenInterruptGPIOInit	32	static
-../Core/Src/ApplicationCode.c:109:6:EXTI15_10_IRQHandler	16	static
-../Core/Src/ApplicationCode.c:220:6:buttonInitInterrupt	8	static
-../Core/Src/ApplicationCode.c:227:6:timerInit	8	static
+../Core/Src/ApplicationCode.c:29:6:ApplicationInit	8	static
+../Core/Src/ApplicationCode.c:60:6:LCD_Visual_Demo	8	static
+../Core/Src/ApplicationCode.c:65:6:LCD_Touch_Polling_Demo	8	static
+../Core/Src/ApplicationCode.c:86:6:LCDTouchScreenInterruptGPIOInit	32	static
+../Core/Src/ApplicationCode.c:110:6:EXTI15_10_IRQHandler	16	static
+../Core/Src/ApplicationCode.c:215:6:buttonInitInterrupt	8	static
+../Core/Src/ApplicationCode.c:222:6:timerInit	8	static
