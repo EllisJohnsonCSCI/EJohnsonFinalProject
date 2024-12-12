@@ -8,15 +8,16 @@
 #include "Gameplay.h"
 
 uint8_t timeCount = 0;
+
 uint8_t currentBlock;
 uint8_t currentOrientation = 0;
+uint8_t currentXpos = STARTING_XPOS;
+uint8_t currentYpos = STARTING_YPOS;
 
 // SCREENS
 
 void screen1(void){
-	clearScreen();
-	LCD_SetTextColor(LCD_COLOR_BLACK);
-	LCD_SetFont(&Font16x24);
+	resetScreen();
 
 	// Show all blocks
 	LCD_Draw_OBlock(90,250);
@@ -48,9 +49,7 @@ void screen2(void){
 	//10 tall x 6 wide
 	//30*10 = 300
 	//30*6 = 180
-	LCD_SetTextColor(LCD_COLOR_BLACK);
-	LCD_SetFont(&Font16x24);
-	clearScreen();
+	resetScreen();
 
 	// Border
 	LCD_Draw_Rectangle_Empty(30,10,180,300,LCD_COLOR_BLACK);
@@ -92,15 +91,19 @@ void screen2(void){
 }
 
 void screen3(void){
-	LCD_SetTextColor(LCD_COLOR_BLACK);
-	LCD_SetFont(&Font16x24);
-	clearScreen();
+	resetScreen();
 
 	// Disable all interrupts
 
 	// Display time
 	//String function working will be nice for this
 	LCD_DisplayChar(80,40,'3');
+}
+
+void resetScreen(){
+	LCD_SetTextColor(LCD_COLOR_BLACK);
+	LCD_SetFont(&Font16x24);
+	clearScreen();
 }
 
 // BLOCK LOGIC
@@ -117,25 +120,25 @@ void generateBlock(){
 void drawBlock(){
 	switch(currentBlock){
 	case 0:
-		LCD_Draw_OBlock(90,250);
+		LCD_Draw_OBlock(currentXpos,currentYpos);
 		break;
 	case 1:
-		LCD_Draw_IBlock(105,110,currentOrientation);
+		LCD_Draw_IBlock(currentXpos,currentYpos,currentOrientation);
 		break;
 	case 2:
-		LCD_Draw_SBlock(170,200,currentOrientation);
+		LCD_Draw_SBlock(currentXpos,currentYpos,currentOrientation);
 		break;
 	case 3:
-		LCD_Draw_ZBlock(10,200,currentOrientation);
+		LCD_Draw_ZBlock(currentXpos,currentYpos,currentOrientation);
 		break;
 	case 4:
-		LCD_Draw_LBlock(20,10,currentOrientation);
+		LCD_Draw_LBlock(currentXpos,currentYpos,currentOrientation);
 		break;
 	case 5:
-		LCD_Draw_JBlock(190,10,currentOrientation);
+		LCD_Draw_JBlock(currentXpos,currentYpos,currentOrientation);
 		break;
 	case 6:
-		LCD_Draw_TBlock(75,35,currentOrientation);
+		LCD_Draw_TBlock(currentXpos,currentYpos,currentOrientation);
 		break;
 	default:
 		break;
@@ -144,4 +147,17 @@ void drawBlock(){
 
 void changeOrientation(){
 	currentOrientation++;
+}
+void resetPosition(){
+	currentXpos = STARTING_XPOS;
+	currentYpos = STARTING_YPOS;
+}
+void moveBlockDown(){
+	currentYpos += BLOCK_LENGTH;
+}
+void moveBlockRight(){
+	currentXpos += BLOCK_LENGTH;
+}
+void moveBlockLeft(){
+	currentXpos -= BLOCK_LENGTH;
 }

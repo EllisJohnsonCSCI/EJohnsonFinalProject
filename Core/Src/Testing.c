@@ -46,6 +46,7 @@ void testRNG(){
 /* LCD */
 
 void testString(){
+	LCD_DisplayChar(80,40,'T');
 	uint8_t string[] = "TETRIS";
 	LCD_DisplayString(80, 40, string);
 }
@@ -62,7 +63,8 @@ void testMove(){
 		//Want to use layers? Clear layer with current block only
 		LCD_Clear(testLayer, LCD_COLOR_WHITE);
 		//Draw block 30px down
-		LCD_Draw_LBlock(xpos,ypos+BLOCK_LENGTH,0);
+		LCD_Draw_LBlock(xpos, ypos+BLOCK_LENGTH, 0);
+		ypos += BLOCK_LENGTH;
 	}
 	//Layer 0 = border, set blocks (things with collision)
 	//Layer 1 = current block

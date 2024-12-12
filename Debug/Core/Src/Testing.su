@@ -1,4 +1,4 @@
 ../Core/Src/Testing.c:12:6:testRNG	16	static
 ../Core/Src/Testing.c:48:6:testString	16	static
-../Core/Src/Testing.c:53:6:testMove	16	static
-../Core/Src/Testing.c:71:6:testRotate	16	static
+../Core/Src/Testing.c:54:6:testMove	16	static
+../Core/Src/Testing.c:73:6:testRotate	16	static

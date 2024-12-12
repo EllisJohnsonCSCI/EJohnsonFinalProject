@@ -1,4 +1,11 @@
-../Core/Src/Gameplay.c:16:6:screen1	1
-../Core/Src/Gameplay.c:47:6:screen2	1
-../Core/Src/Gameplay.c:98:6:screen3	1
-../Core/Src/Gameplay.c:116:6:drawBlock	8
+../Core/Src/Gameplay.c:19:6:screen1	1
+../Core/Src/Gameplay.c:48:6:screen2	1
+../Core/Src/Gameplay.c:93:6:screen3	1
+../Core/Src/Gameplay.c:103:6:resetScreen	1
+../Core/Src/Gameplay.c:111:6:generateBlock	1
+../Core/Src/Gameplay.c:120:6:drawBlock	8
+../Core/Src/Gameplay.c:148:6:changeOrientation	1
+../Core/Src/Gameplay.c:151:6:resetPosition	1
+../Core/Src/Gameplay.c:155:6:moveBlockDown	1
+../Core/Src/Gameplay.c:158:6:moveBlockRight	1
+../Core/Src/Gameplay.c:161:6:moveBlockLeft	1

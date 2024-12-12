@@ -35,9 +35,9 @@
 #define LCD_COLOR_GREEN         0x07E0
 #define LCD_COLOR_CYAN          0x7FFF
 #define LCD_COLOR_YELLOW        0xFFE0
-#define LCD_COLOR_ORANGE        0xFBA0
-#define LCD_COLOR_PINK			0xFAF3
-#define LCD_COLOR_PURPLE        0xB81F
+#define LCD_COLOR_ORANGE        0xfdce
+#define LCD_COLOR_PINK			0xfcb5
+#define LCD_COLOR_PURPLE        0xdabf
 
 #define BLOCK_LENGTH			30
 

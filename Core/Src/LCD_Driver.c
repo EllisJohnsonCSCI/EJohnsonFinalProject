@@ -272,12 +272,10 @@ void LCD_Draw_Rectangle_Fill(uint16_t Xpos, uint16_t Ypos, uint16_t len, uint16_
 }
 
 void LCD_Draw_OBlock(uint16_t Xpos, uint16_t Ypos){
-	//All orientations same
 	LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*2,BLOCK_LENGTH*2,LCD_COLOR_YELLOW);
 }
 void LCD_Draw_IBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation){
-	//2 orientations same
-	switch(orientation){
+	switch(orientation % 2){
 	case 0:
 		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH,BLOCK_LENGTH*4,LCD_COLOR_CYAN);
 		break;
@@ -289,80 +287,94 @@ void LCD_Draw_IBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation){
 	}
 }
 void LCD_Draw_SBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation){
-	switch(orientation){
+	switch(orientation % 2){
 	case 0:
 		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*2,BLOCK_LENGTH,LCD_COLOR_RED);
 		LCD_Draw_Rectangle_Fill(Xpos-BLOCK_LENGTH,Ypos+BLOCK_LENGTH,BLOCK_LENGTH*2,BLOCK_LENGTH,LCD_COLOR_RED);
 		break;
 	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH,BLOCK_LENGTH*2,LCD_COLOR_RED);
+		LCD_Draw_Rectangle_Fill(Xpos+BLOCK_LENGTH,Ypos+BLOCK_LENGTH,BLOCK_LENGTH,BLOCK_LENGTH*2,LCD_COLOR_RED);
 		break;
 	default:
 		break;
 	}
 }
 void LCD_Draw_ZBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation){
-	switch(orientation){
+	switch(orientation % 2){
 	case 0:
 		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*2,BLOCK_LENGTH,LCD_COLOR_GREEN);
 		LCD_Draw_Rectangle_Fill(Xpos+BLOCK_LENGTH,Ypos+BLOCK_LENGTH,BLOCK_LENGTH*2,BLOCK_LENGTH,LCD_COLOR_GREEN);
 		break;
 	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH,BLOCK_LENGTH*2,LCD_COLOR_GREEN);
+		LCD_Draw_Rectangle_Fill(Xpos-BLOCK_LENGTH,Ypos+BLOCK_LENGTH,BLOCK_LENGTH,BLOCK_LENGTH*2,LCD_COLOR_GREEN);
 		break;
 	default:
 		break;
 	}
 }
 void LCD_Draw_LBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation){
-	switch(orientation){
+	switch(orientation % 4){
 	case 0:
 		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH,BLOCK_LENGTH*3,LCD_COLOR_ORANGE);
 		LCD_Draw_Rectangle_Fill(Xpos+BLOCK_LENGTH,Ypos+(BLOCK_LENGTH*2),BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_ORANGE);
 		break;
 	case 1:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*3,BLOCK_LENGTH,LCD_COLOR_ORANGE);
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos+BLOCK_LENGTH,BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_ORANGE);
 		break;
 	case 2:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*2,BLOCK_LENGTH,LCD_COLOR_ORANGE);
+		LCD_Draw_Rectangle_Fill(Xpos+BLOCK_LENGTH,Ypos+BLOCK_LENGTH,BLOCK_LENGTH,BLOCK_LENGTH*2,LCD_COLOR_ORANGE);
 		break;
 	case 3:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*3,BLOCK_LENGTH,LCD_COLOR_ORANGE);
+		LCD_Draw_Rectangle_Fill(Xpos+(BLOCK_LENGTH*2),Ypos-BLOCK_LENGTH,BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_ORANGE);
 		break;
 	default:
 		break;
 	}
 }
 void LCD_Draw_JBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation){
-	switch(orientation){
+	switch(orientation % 4){
 	case 0:
 		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH,BLOCK_LENGTH*3,LCD_COLOR_PINK);
 		LCD_Draw_Rectangle_Fill(Xpos-BLOCK_LENGTH,Ypos+(BLOCK_LENGTH*2),BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_PINK);
 		break;
 	case 1:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*3,BLOCK_LENGTH,LCD_COLOR_PINK);
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos-BLOCK_LENGTH,BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_PINK);
 		break;
 	case 2:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH,BLOCK_LENGTH*3,LCD_COLOR_PINK);
+		LCD_Draw_Rectangle_Fill(Xpos+BLOCK_LENGTH,Ypos,BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_PINK);
 		break;
 	case 3:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*3,BLOCK_LENGTH,LCD_COLOR_PINK);
+		LCD_Draw_Rectangle_Fill(Xpos+(BLOCK_LENGTH+2),Ypos+BLOCK_LENGTH,BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_PINK);
 		break;
 	default:
 		break;
 	}
 }
 void LCD_Draw_TBlock(uint16_t Xpos, uint16_t Ypos, uint8_t orientation){
-	switch(orientation){
+	switch(orientation % 4){
 	case 0:
 		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*3,BLOCK_LENGTH,LCD_COLOR_PURPLE);
 		LCD_Draw_Rectangle_Fill(Xpos+BLOCK_LENGTH,Ypos+BLOCK_LENGTH,BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_PURPLE);
 		break;
 	case 1:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH,BLOCK_LENGTH*3,LCD_COLOR_PURPLE);
+		LCD_Draw_Rectangle_Fill(Xpos-BLOCK_LENGTH,Ypos+BLOCK_LENGTH,BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_PURPLE);
 		break;
 	case 2:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH*3,BLOCK_LENGTH,LCD_COLOR_PURPLE);
+		LCD_Draw_Rectangle_Fill(Xpos+BLOCK_LENGTH,Ypos-BLOCK_LENGTH,BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_PURPLE);
 		break;
 	case 3:
+		LCD_Draw_Rectangle_Fill(Xpos,Ypos,BLOCK_LENGTH,BLOCK_LENGTH*3,LCD_COLOR_PURPLE);
+		LCD_Draw_Rectangle_Fill(Xpos+BLOCK_LENGTH,Ypos+BLOCK_LENGTH,BLOCK_LENGTH,BLOCK_LENGTH,LCD_COLOR_PURPLE);
 		break;
 	default:
 		break;
@@ -391,7 +403,7 @@ void LCD_Draw_Char(uint16_t Xpos, uint16_t Ypos, const uint16_t *c)
     {
       if((((c[index] & ((0x80 << ((LCD_Currentfonts->Width / 12 ) * 8 ) ) >> counter)) == 0x00) && (LCD_Currentfonts->Width <= 12)) || (((c[index] & (0x1 << counter)) == 0x00)&&(LCD_Currentfonts->Width > 12 )))
       {
-         //Background If want to overrite text under then add a set color here
+         //Background If want to overwrite text under then add a set color here
       }
       else
       {
@@ -409,9 +421,11 @@ void LCD_DisplayChar(uint16_t Xpos, uint16_t Ypos, uint8_t Ascii)
 }
 
 void LCD_DisplayString(uint16_t Xpos, uint16_t Ypos, uint8_t *Ascii){
-	int i = 0;
+	uint32_t i = 0;
+	uint32_t space = 0;
 	while(Ascii[i] != '\0'){
-		switch(Ascii[i]){
+		uint8_t currentLetter = Ascii[i];
+		switch(currentLetter){
 		//Capital letter = +15
 		case 'A':
 		case 'B':
@@ -439,8 +453,8 @@ void LCD_DisplayString(uint16_t Xpos, uint16_t Ypos, uint8_t *Ascii){
 		case 'X':
 		case 'Y':
 		case 'Z':
-			i += 15;
-			LCD_DisplayChar(Xpos+i,Ypos,Ascii[i]);
+			LCD_DisplayChar(Xpos+space,Ypos,currentLetter);
+			space = 15;
 			break;
 		//Lowercase letter = +10
 		case 'a':
@@ -467,14 +481,14 @@ void LCD_DisplayString(uint16_t Xpos, uint16_t Ypos, uint8_t *Ascii){
 		case 'x':
 		case 'y':
 		case 'z':
-			i += 10;
-			LCD_DisplayChar(Xpos+i,Ypos,Ascii[i]);
+			LCD_DisplayChar(Xpos+space,Ypos,currentLetter);
+			space = 10;
 			break;
 		//Thin letter = +5
 		case 'i':
 		case 'l':
-			i += 5;
-			LCD_DisplayChar(Xpos+i,Ypos,Ascii[i]);
+			LCD_DisplayChar(Xpos+space,Ypos,currentLetter);
+			space = 5;
 			break;
 		default:
 			break;
