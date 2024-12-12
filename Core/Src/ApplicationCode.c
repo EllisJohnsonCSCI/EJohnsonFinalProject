@@ -151,7 +151,7 @@ void EXTI15_10_IRQHandler(){
 	case 0:
 		//Check if pressing in range of button
 		//if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 70, 160, 100, 100)){
-			// Doesn't work so just ignore button
+			// Doesn't work so just ignore start button
 		//}
 		screenCount = 1;
 		screen2();
@@ -159,7 +159,6 @@ void EXTI15_10_IRQHandler(){
 
 	// PLAYING GAME (moving block from side to side)
 	case 1:
-		// Determine if it is pressed or unpressed
 		if(isTouchDetected) // Touch has been detected
 		{
 			printf("\nPressed");
@@ -171,19 +170,13 @@ void EXTI15_10_IRQHandler(){
 			// Check which side of screen is pressed
 			if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 0, 0, 125, 320)){
 				// Pressing on left
-				LCD_Clear(0, LCD_COLOR_RED);
+				moveBlockLeft();
 			}
 			else if(TM_STMPE811_TouchInRectangle(&StaticTouchData, 125, 0, 125, 320)){
 				// Pressing on right
-				LCD_Clear(0, LCD_COLOR_GREEN);
+				moveBlockRight();
 			}
 		}
-		else{
-			/* Touch not pressed */
-			printf("\nNot pressed \n");
-			//screen2();
-		}
-
 		break;
 
 	// Consider third screen if we include menu/replay button

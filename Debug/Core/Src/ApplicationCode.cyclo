@@ -3,5 +3,5 @@
 ../Core/Src/ApplicationCode.c:64:6:LCD_Touch_Polling_Demo	2
 ../Core/Src/ApplicationCode.c:85:6:LCDTouchScreenInterruptGPIOInit	1
 ../Core/Src/ApplicationCode.c:109:6:EXTI15_10_IRQHandler	11
-../Core/Src/ApplicationCode.c:217:6:buttonInitInterrupt	1
-../Core/Src/ApplicationCode.c:224:6:timerInit	1
+../Core/Src/ApplicationCode.c:220:6:buttonInitInterrupt	1
+../Core/Src/ApplicationCode.c:227:6:timerInit	1

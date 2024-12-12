@@ -54,40 +54,16 @@ void screen2(void){
 	// Border
 	LCD_Draw_Rectangle_Empty(30,10,180,300,LCD_COLOR_BLACK);
 
-	// RNG (generate first block) (maybe unnecessary)
+	// RNG (generate first block)
 	generateBlock();
 
 	// Timer
 	Timer_StartInterrupt();
 
-	// Maybe want to keep scheduler in timer interrupt?
-	//vv uncommenting this seems to break touch screen left/right
-	/*
-	uint8_t eventsToRun = 0;
-
-	while(1){
-		eventsToRun = getScheduledEvents();
-		if(eventsToRun & ROTATE_BLOCK_EVENT){
-			// Rotate
-		}
-		if(eventsToRun & BLOCK_LEFT_EVENT){
-			// Move block left
-		}
-		if(eventsToRun & BLOCK_RIGHT_EVENT){
-			// Move block right
-		}
-		if(eventsToRun & BLOCK_DOWN_EVENT){
-			// Move block down
-		}
-		if(eventsToRun & APP_DELAY_FLAG_EVENT){
-			HAL_Delay(5000); // Maybe shorter
-		}
-	}
-	*/
+	// Determine lose conditions
+	// Get time (see proj4 I think)
 
 	// Figure out block stacking & collision
-
-	// Get time
 }
 
 void screen3(void){
@@ -145,7 +121,7 @@ void drawBlock(){
 	}
 }
 
-void changeOrientation(){
+void rotateBlock(){
 	currentOrientation++;
 }
 void resetPosition(){

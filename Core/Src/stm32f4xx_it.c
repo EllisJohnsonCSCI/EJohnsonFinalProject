@@ -201,29 +201,35 @@ void SysTick_Handler(void)
 /**
   * @brief This function handles EXTI line0 interrupt.
   */
-void EXTI0_IRQHandler(void)
-{
+void EXTI0_IRQHandler(void){
   /* USER CODE BEGIN EXTI0_IRQn 0 */
 
   /* USER CODE END EXTI0_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(B1_Pin);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
-  //addSchedulerEvent(ROTATE_BLOCK_EVENT);
-  LCD_Clear(0, LCD_COLOR_RED);
+  addSchedulerEvent(ROTATE_BLOCK_EVENT);
   /* USER CODE END EXTI0_IRQn 1 */
 }
 
 /**
   * @brief This function handles TIM7 global interrupt.
   */
-void TIM7_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM7_IRQn 0 */
+void TIM7_IRQHandler(void){
+	/* USER CODE BEGIN TIM7_IRQn 0 */
 
-  /* USER CODE END TIM7_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim7);
-  /* USER CODE BEGIN TIM7_IRQn 1 */
-  LCD_Clear(0, LCD_COLOR_GREEN);
+	/* USER CODE END TIM7_IRQn 0 */
+	HAL_TIM_IRQHandler(&htim7);
+	/* USER CODE BEGIN TIM7_IRQn 1 */
+	moveBlockDown();
+
+	uint8_t eventsToRun = getScheduledEvents();
+	if(eventsToRun & ROTATE_BLOCK_EVENT){
+		rotateBlock();
+		removeSchedulerEvent(ROTATE_BLOCK_EVENT);
+	}
+
+	clearScreen();
+	drawBlock();
   /* USER CODE END TIM7_IRQn 1 */
 }
 

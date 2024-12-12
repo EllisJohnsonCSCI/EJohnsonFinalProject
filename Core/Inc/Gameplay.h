@@ -21,7 +21,7 @@ void resetScreen();
 
 void generateBlock();
 void drawBlock();
-void changeOrientation();
+void rotateBlock();
 void resetPosition();
 void moveBlockDown();
 void moveBlockRight();
