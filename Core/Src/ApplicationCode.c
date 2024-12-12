@@ -131,6 +131,19 @@ void EXTI15_10_IRQHandler(){
 		isTouchDetected = true;
 	}
 
+	STMPE811_Write(STMPE811_FIFO_STA, 0x01);
+	STMPE811_Write(STMPE811_FIFO_STA, 0x00);
+
+	// Re-enable IRQs
+    WriteDataToTouchModule(STMPE811_INT_EN, currentIRQEnables);
+	HAL_EXTI_ClearPending(&LCDTouchIRQ, EXTI_TRIGGER_RISING_FALLING);
+
+	HAL_NVIC_ClearPendingIRQ(EXTI15_10_IRQn);
+	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
+	//Potential ERRATA? Clearing IRQ bit again due to an IRQ being triggered DURING the handling of this IRQ..
+	WriteDataToTouchModule(STMPE811_INT_STA, clearIRQData);
+
 	/* - ACTION TO EXECUTE DUE TO INTERRUPT - */
 
 	switch(screenCount){
@@ -168,7 +181,7 @@ void EXTI15_10_IRQHandler(){
 		else{
 			/* Touch not pressed */
 			printf("\nNot pressed \n");
-			screen2();
+			//screen2();
 		}
 
 		break;
@@ -178,23 +191,6 @@ void EXTI15_10_IRQHandler(){
 	default:
 		break;
 	}
-
-
-	/* - I think everything below here is just taking care of interrupt bits - */
-
-	STMPE811_Write(STMPE811_FIFO_STA, 0x01);
-	STMPE811_Write(STMPE811_FIFO_STA, 0x00);
-
-	// Re-enable IRQs
-    WriteDataToTouchModule(STMPE811_INT_EN, currentIRQEnables);
-	HAL_EXTI_ClearPending(&LCDTouchIRQ, EXTI_TRIGGER_RISING_FALLING);
-
-	HAL_NVIC_ClearPendingIRQ(EXTI15_10_IRQn);
-	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
-
-	//Potential ERRATA? Clearing IRQ bit again due to an IRQ being triggered DURING the handling of this IRQ..
-	WriteDataToTouchModule(STMPE811_INT_STA, clearIRQData);
-
 }
 #endif // TOUCH_INTERRUPT_ENABLED
 #endif // COMPILE_TOUCH_FUNCTIONS
